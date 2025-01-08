@@ -9,14 +9,14 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
+import { ProductList } from "./product/ProductList";
+import { ProductCreate } from "./product/ProductCreate";
+import { ProductEdit } from "./product/ProductEdit";
+import { ProductShow } from "./product/ProductShow";
 import { LocationList } from "./location/LocationList";
 import { LocationCreate } from "./location/LocationCreate";
 import { LocationEdit } from "./location/LocationEdit";
 import { LocationShow } from "./location/LocationShow";
-import { ArticleList } from "./article/ArticleList";
-import { ArticleCreate } from "./article/ArticleCreate";
-import { ArticleEdit } from "./article/ArticleEdit";
-import { ArticleShow } from "./article/ArticleShow";
 import { PriceList } from "./price/PriceList";
 import { PriceCreate } from "./price/PriceCreate";
 import { PriceEdit } from "./price/PriceEdit";
@@ -25,14 +25,14 @@ import { StockList } from "./stock/StockList";
 import { StockCreate } from "./stock/StockCreate";
 import { StockEdit } from "./stock/StockEdit";
 import { StockShow } from "./stock/StockShow";
-import { SupplierList } from "./supplier/SupplierList";
-import { SupplierCreate } from "./supplier/SupplierCreate";
-import { SupplierEdit } from "./supplier/SupplierEdit";
-import { SupplierShow } from "./supplier/SupplierShow";
 import { ImageList } from "./image/ImageList";
 import { ImageCreate } from "./image/ImageCreate";
 import { ImageEdit } from "./image/ImageEdit";
 import { ImageShow } from "./image/ImageShow";
+import { SupplierList } from "./supplier/SupplierList";
+import { SupplierCreate } from "./supplier/SupplierCreate";
+import { SupplierEdit } from "./supplier/SupplierEdit";
+import { SupplierShow } from "./supplier/SupplierShow";
 import { OrderList } from "./order/OrderList";
 import { OrderCreate } from "./order/OrderCreate";
 import { OrderEdit } from "./order/OrderEdit";
@@ -58,18 +58,18 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
+          name="Product"
+          list={ProductList}
+          edit={ProductEdit}
+          create={ProductCreate}
+          show={ProductShow}
+        />
+        <Resource
           name="Location"
           list={LocationList}
           edit={LocationEdit}
           create={LocationCreate}
           show={LocationShow}
-        />
-        <Resource
-          name="Article"
-          list={ArticleList}
-          edit={ArticleEdit}
-          create={ArticleCreate}
-          show={ArticleShow}
         />
         <Resource
           name="Price"
@@ -86,18 +86,18 @@ const App = (): React.ReactElement => {
           show={StockShow}
         />
         <Resource
-          name="Supplier"
-          list={SupplierList}
-          edit={SupplierEdit}
-          create={SupplierCreate}
-          show={SupplierShow}
-        />
-        <Resource
           name="Image"
           list={ImageList}
           edit={ImageEdit}
           create={ImageCreate}
           show={ImageShow}
+        />
+        <Resource
+          name="Supplier"
+          list={SupplierList}
+          edit={SupplierEdit}
+          create={SupplierCreate}
+          show={SupplierShow}
         />
         <Resource
           name="Order"

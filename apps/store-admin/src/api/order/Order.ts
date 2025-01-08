@@ -1,9 +1,9 @@
-import { Article } from "../article/Article";
+import { Product } from "../product/Product";
 import { Location } from "../location/Location";
 import { Stock } from "../stock/Stock";
 
 export type Order = {
-  article?: Article | null;
+  article?: Product | null;
   createdAt: Date;
   id: string;
   locations?: Array<Location>;

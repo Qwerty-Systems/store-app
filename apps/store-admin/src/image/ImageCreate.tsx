@@ -6,14 +6,14 @@ import {
   ReferenceInput,
   SelectInput,
 } from "react-admin";
-import { ArticleTitle } from "../article/ArticleTitle";
+import { ProductTitle } from "../product/ProductTitle";
 
 export const ImageCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceInput source="article.id" reference="Article" label="Article">
-          <SelectInput optionText={ArticleTitle} />
+        <ReferenceInput source="article.id" reference="Product" label="Article">
+          <SelectInput optionText={ProductTitle} />
         </ReferenceInput>
         <div />
       </SimpleForm>

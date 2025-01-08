@@ -28,7 +28,7 @@ import { ImageFindUniqueArgs } from "./ImageFindUniqueArgs";
 import { CreateImageArgs } from "./CreateImageArgs";
 import { UpdateImageArgs } from "./UpdateImageArgs";
 import { DeleteImageArgs } from "./DeleteImageArgs";
-import { Article } from "../../article/base/Article";
+import { Product } from "../../product/base/Product";
 import { ImageService } from "../image.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Image)
@@ -179,16 +179,16 @@ export class ImageResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Article, {
+  @graphql.ResolveField(() => Product, {
     nullable: true,
     name: "article",
   })
   @nestAccessControl.UseRoles({
-    resource: "Article",
+    resource: "Product",
     action: "read",
     possession: "any",
   })
-  async getArticle(@graphql.Parent() parent: Image): Promise<Article | null> {
+  async getArticle(@graphql.Parent() parent: Image): Promise<Product | null> {
     const result = await this.service.getArticle(parent.id);
 
     if (!result) {

@@ -30,7 +30,7 @@ import { LocationFindManyArgs } from "../../location/base/LocationFindManyArgs";
 import { Location } from "../../location/base/Location";
 import { StockFindManyArgs } from "../../stock/base/StockFindManyArgs";
 import { Stock } from "../../stock/base/Stock";
-import { Article } from "../../article/base/Article";
+import { Product } from "../../product/base/Product";
 import { OrderService } from "../order.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Order)
@@ -212,16 +212,16 @@ export class OrderResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Article, {
+  @graphql.ResolveField(() => Product, {
     nullable: true,
     name: "article",
   })
   @nestAccessControl.UseRoles({
-    resource: "Article",
+    resource: "Product",
     action: "read",
     possession: "any",
   })
-  async getArticle(@graphql.Parent() parent: Order): Promise<Article | null> {
+  async getArticle(@graphql.Parent() parent: Order): Promise<Product | null> {
     const result = await this.service.getArticle(parent.id);
 
     if (!result) {

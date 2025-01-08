@@ -19,23 +19,11 @@ model User {
   username  String   @unique
 }
 
-model Location {
-  address   String?
-  contact   String?
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  name      String?
-  order     Order?   @relation(fields: [orderId], references: [id])
-  orderId   String?
-  stock     Stock?   @relation(fields: [stockId], references: [id])
-  stockId   String?
-  updatedAt DateTime @updatedAt
-}
-
-model Article {
+model Product {
   additionalImages String?
   articleCode      String?
   createdAt        DateTime @default(now())
+  defaultImageUrl  String?
   description      String?
   descriptionEn    String?
   id               String   @id @default(cuid())
@@ -49,8 +37,21 @@ model Article {
   updatedAt        DateTime @updatedAt
 }
 
+model Location {
+  address   String?
+  contact   String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String?
+  order     Order?   @relation(fields: [orderId], references: [id])
+  orderId   String?
+  stock     Stock?   @relation(fields: [stockId], references: [id])
+  stockId   String?
+  updatedAt DateTime @updatedAt
+}
+
 model Price {
-  article          Article?   @relation(fields: [articleId], references: [id])
+  article          Product?   @relation(fields: [articleId], references: [id])
   articleId        String?
   createdAt        DateTime   @default(now())
   effectiveDate    DateTime?
@@ -62,7 +63,7 @@ model Price {
 }
 
 model Stock {
-  article        Article?   @relation(fields: [articleId], references: [id])
+  article        Product?   @relation(fields: [articleId], references: [id])
   articleId      String?
   availableStock Int?
   createdAt      DateTime   @default(now())
@@ -79,6 +80,15 @@ model Stock {
   updatedAt      DateTime   @updatedAt
 }
 
+model Image {
+  article   Product? @relation(fields: [articleId], references: [id])
+  articleId String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  image     Json
+  updatedAt DateTime @updatedAt
+}
+
 model Supplier {
   contact   String?
   country   String?
@@ -92,17 +102,8 @@ model Supplier {
   updatedAt DateTime @updatedAt
 }
 
-model Image {
-  article   Article? @relation(fields: [articleId], references: [id])
-  articleId String?
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  image     Json?
-  updatedAt DateTime @updatedAt
-}
-
 model Order {
-  article       Article?   @relation(fields: [articleId], references: [id])
+  article       Product?   @relation(fields: [articleId], references: [id])
   articleId     String?
   createdAt     DateTime   @default(now())
   id            String     @id @default(cuid())

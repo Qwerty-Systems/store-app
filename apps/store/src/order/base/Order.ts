@@ -11,7 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { Article } from "../../article/base/Article";
+import { Product } from "../../product/base/Product";
 
 import {
   ValidateNested,
@@ -33,12 +33,12 @@ import { Stock } from "../../stock/base/Stock";
 class Order {
   @ApiProperty({
     required: false,
-    type: () => Article,
+    type: () => Product,
   })
   @ValidateNested()
-  @Type(() => Article)
+  @Type(() => Product)
   @IsOptional()
-  article?: Article | null;
+  article?: Product | null;
 
   @ApiProperty({
     required: true,

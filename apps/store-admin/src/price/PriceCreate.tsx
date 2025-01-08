@@ -12,15 +12,15 @@ import {
   SelectArrayInput,
 } from "react-admin";
 
-import { ArticleTitle } from "../article/ArticleTitle";
+import { ProductTitle } from "../product/ProductTitle";
 import { SupplierTitle } from "../supplier/SupplierTitle";
 
 export const PriceCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceInput source="article.id" reference="Article" label="Article">
-          <SelectInput optionText={ArticleTitle} />
+        <ReferenceInput source="article.id" reference="Product" label="Article">
+          <SelectInput optionText={ProductTitle} />
         </ReferenceInput>
         <DateTimeInput label="effectiveDate" source="effectiveDate" />
         <NumberInput label="priceKenya" source="priceKenya" />

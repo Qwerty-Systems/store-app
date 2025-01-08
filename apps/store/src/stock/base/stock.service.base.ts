@@ -17,7 +17,7 @@ import {
   Location as PrismaLocation,
   Order as PrismaOrder,
   Supplier as PrismaSupplier,
-  Article as PrismaArticle,
+  Product as PrismaProduct,
 } from "@prisma/client";
 
 export class StockServiceBase {
@@ -76,7 +76,7 @@ export class StockServiceBase {
       .suppliers(args);
   }
 
-  async getArticle(parentId: string): Promise<PrismaArticle | null> {
+  async getArticle(parentId: string): Promise<PrismaProduct | null> {
     return this.prisma.stock
       .findUnique({
         where: { id: parentId },

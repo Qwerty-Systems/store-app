@@ -13,14 +13,14 @@ import {
 
 import { ORDER_TITLE_FIELD } from "./OrderTitle";
 import { STOCK_TITLE_FIELD } from "../stock/StockTitle";
-import { ARTICLE_TITLE_FIELD } from "../article/ArticleTitle";
+import { PRODUCT_TITLE_FIELD } from "../product/ProductTitle";
 
 export const OrderShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
-        <ReferenceField label="Article" source="article.id" reference="Article">
-          <TextField source={ARTICLE_TITLE_FIELD} />
+        <ReferenceField label="Article" source="product.id" reference="Product">
+          <TextField source={PRODUCT_TITLE_FIELD} />
         </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
@@ -56,10 +56,10 @@ export const OrderShow = (props: ShowProps): React.ReactElement => {
           <Datagrid rowClick="show" bulkActionButtons={false}>
             <ReferenceField
               label="Article"
-              source="article.id"
-              reference="Article"
+              source="product.id"
+              reference="Product"
             >
-              <TextField source={ARTICLE_TITLE_FIELD} />
+              <TextField source={PRODUCT_TITLE_FIELD} />
             </ReferenceField>
             <TextField label="availableStock" source="availableStock" />
             <DateField source="createdAt" label="Created At" />
