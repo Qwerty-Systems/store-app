@@ -12,7 +12,7 @@ import {
   SelectArrayInput,
 } from "react-admin";
 
-import { ArticleTitle } from "../article/ArticleTitle";
+import { ProductTitle } from "../product/ProductTitle";
 import { LocationTitle } from "../location/LocationTitle";
 import { OrderTitle } from "../order/OrderTitle";
 import { SupplierTitle } from "../supplier/SupplierTitle";
@@ -21,8 +21,8 @@ export const StockEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <ReferenceInput source="article.id" reference="Article" label="Article">
-          <SelectInput optionText={ArticleTitle} />
+        <ReferenceInput source="article.id" reference="Product" label="Article">
+          <SelectInput optionText={ProductTitle} />
         </ReferenceInput>
         <NumberInput step={1} label="availableStock" source="availableStock" />
         <TextInput label="location" source="location" />

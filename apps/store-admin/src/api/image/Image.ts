@@ -1,8 +1,8 @@
-import { Article } from "../article/Article";
+import { Product } from "../product/Product";
 import { JsonValue } from "type-fest";
 
 export type Image = {
-  article?: Article | null;
+  article?: Product | null;
   createdAt: Date;
   id: string;
   image: JsonValue;

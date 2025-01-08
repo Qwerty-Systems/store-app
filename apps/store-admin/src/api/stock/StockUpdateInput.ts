@@ -1,11 +1,11 @@
-import { ArticleWhereUniqueInput } from "../article/ArticleWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
 import { LocationUpdateManyWithoutStocksInput } from "./LocationUpdateManyWithoutStocksInput";
 import { OrderWhereUniqueInput } from "../order/OrderWhereUniqueInput";
 import { OrderUpdateManyWithoutStocksInput } from "./OrderUpdateManyWithoutStocksInput";
 import { SupplierUpdateManyWithoutStocksInput } from "./SupplierUpdateManyWithoutStocksInput";
 
 export type StockUpdateInput = {
-  article?: ArticleWhereUniqueInput | null;
+  article?: ProductWhereUniqueInput | null;
   availableStock?: number | null;
   location?: string | null;
   locations?: LocationUpdateManyWithoutStocksInput;

@@ -32,7 +32,7 @@ import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
 import { Order } from "../../order/base/Order";
 import { SupplierFindManyArgs } from "../../supplier/base/SupplierFindManyArgs";
 import { Supplier } from "../../supplier/base/Supplier";
-import { Article } from "../../article/base/Article";
+import { Product } from "../../product/base/Product";
 import { StockService } from "../stock.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Stock)
@@ -234,16 +234,16 @@ export class StockResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Article, {
+  @graphql.ResolveField(() => Product, {
     nullable: true,
     name: "article",
   })
   @nestAccessControl.UseRoles({
-    resource: "Article",
+    resource: "Product",
     action: "read",
     possession: "any",
   })
-  async getArticle(@graphql.Parent() parent: Stock): Promise<Article | null> {
+  async getArticle(@graphql.Parent() parent: Stock): Promise<Product | null> {
     const result = await this.service.getArticle(parent.id);
 
     if (!result) {

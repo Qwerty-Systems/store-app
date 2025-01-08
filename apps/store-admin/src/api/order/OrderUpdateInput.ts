@@ -1,10 +1,10 @@
-import { ArticleWhereUniqueInput } from "../article/ArticleWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
 import { LocationUpdateManyWithoutOrdersInput } from "./LocationUpdateManyWithoutOrdersInput";
 import { StockWhereUniqueInput } from "../stock/StockWhereUniqueInput";
 import { StockUpdateManyWithoutOrdersInput } from "./StockUpdateManyWithoutOrdersInput";
 
 export type OrderUpdateInput = {
-  article?: ArticleWhereUniqueInput | null;
+  article?: ProductWhereUniqueInput | null;
   locations?: LocationUpdateManyWithoutOrdersInput;
   orderDate?: Date | null;
   orderLocation?: string | null;

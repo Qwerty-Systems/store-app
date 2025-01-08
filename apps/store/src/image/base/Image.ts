@@ -11,7 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { Article } from "../../article/base/Article";
+import { Product } from "../../product/base/Product";
 import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { IsJSONValue } from "../../validators";
@@ -22,12 +22,12 @@ import { JsonValue } from "type-fest";
 class Image {
   @ApiProperty({
     required: false,
-    type: () => Article,
+    type: () => Product,
   })
   @ValidateNested()
-  @Type(() => Article)
+  @Type(() => Product)
   @IsOptional()
-  article?: Article | null;
+  article?: Product | null;
 
   @ApiProperty({
     required: true,
@@ -46,13 +46,10 @@ class Image {
   id!: string;
 
   @ApiProperty({
-    required: false,
+    required: true,
   })
   @IsJSONValue()
-  @IsOptional()
-  @Field(() => GraphQLJSON, {
-    nullable: true,
-  })
+  @Field(() => GraphQLJSON)
   image!: JsonValue;
 
   @ApiProperty({

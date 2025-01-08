@@ -1,10 +1,10 @@
-import { ArticleWhereUniqueInput } from "../article/ArticleWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
 import { LocationCreateNestedManyWithoutOrdersInput } from "./LocationCreateNestedManyWithoutOrdersInput";
 import { StockWhereUniqueInput } from "../stock/StockWhereUniqueInput";
 import { StockCreateNestedManyWithoutOrdersInput } from "./StockCreateNestedManyWithoutOrdersInput";
 
 export type OrderCreateInput = {
-  article?: ArticleWhereUniqueInput | null;
+  article?: ProductWhereUniqueInput | null;
   locations?: LocationCreateNestedManyWithoutOrdersInput;
   orderDate?: Date | null;
   orderLocation?: string | null;

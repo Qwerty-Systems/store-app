@@ -13,7 +13,7 @@ import { PrismaService } from "../../prisma/prisma.service";
 import {
   Prisma,
   Image as PrismaImage,
-  Article as PrismaArticle,
+  Product as PrismaProduct,
 } from "@prisma/client";
 import { LocalStorageService } from "src/storage/providers/local/local.storage.service";
 import { InputJsonValue } from "src/types";
@@ -57,7 +57,7 @@ export class ImageServiceBase {
     const image = await this.localStorageService.uploadFile(
       file,
       [],
-      5000,
+      1000000,
       containerPath
     );
 
@@ -102,7 +102,7 @@ export class ImageServiceBase {
     });
   }
 
-  async getArticle(parentId: string): Promise<PrismaArticle | null> {
+  async getArticle(parentId: string): Promise<PrismaProduct | null> {
     return this.prisma.image
       .findUnique({
         where: { id: parentId },

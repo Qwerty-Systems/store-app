@@ -7,14 +7,14 @@ import {
   TextField,
   DateField,
 } from "react-admin";
-import { ARTICLE_TITLE_FIELD } from "../article/ArticleTitle";
+import { PRODUCT_TITLE_FIELD } from "../product/ProductTitle";
 
 export const ImageShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
-        <ReferenceField label="Article" source="article.id" reference="Article">
-          <TextField source={ARTICLE_TITLE_FIELD} />
+        <ReferenceField label="Article" source="product.id" reference="Product">
+          <TextField source={PRODUCT_TITLE_FIELD} />
         </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />

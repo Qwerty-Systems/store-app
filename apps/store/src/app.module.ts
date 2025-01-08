@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "./user/user.module";
+import { ProductModule } from "./product/product.module";
 import { LocationModule } from "./location/location.module";
-import { ArticleModule } from "./article/article.module";
 import { PriceModule } from "./price/price.module";
 import { StockModule } from "./stock/stock.module";
-import { SupplierModule } from "./supplier/supplier.module";
 import { ImageModule } from "./image/image.module";
+import { SupplierModule } from "./supplier/supplier.module";
 import { OrderModule } from "./order/order.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
@@ -27,12 +27,12 @@ import { AuthModule } from "./auth/auth.module";
     ACLModule,
     AuthModule,
     UserModule,
+    ProductModule,
     LocationModule,
-    ArticleModule,
     PriceModule,
     StockModule,
-    SupplierModule,
     ImageModule,
+    SupplierModule,
     OrderModule,
     HealthModule,
     PrismaModule,

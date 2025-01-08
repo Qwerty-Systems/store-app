@@ -28,7 +28,7 @@ import { UpdatePriceArgs } from "./UpdatePriceArgs";
 import { DeletePriceArgs } from "./DeletePriceArgs";
 import { SupplierFindManyArgs } from "../../supplier/base/SupplierFindManyArgs";
 import { Supplier } from "../../supplier/base/Supplier";
-import { Article } from "../../article/base/Article";
+import { Product } from "../../product/base/Product";
 import { PriceService } from "../price.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Price)
@@ -178,16 +178,16 @@ export class PriceResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Article, {
+  @graphql.ResolveField(() => Product, {
     nullable: true,
     name: "article",
   })
   @nestAccessControl.UseRoles({
-    resource: "Article",
+    resource: "Product",
     action: "read",
     possession: "any",
   })
-  async getArticle(@graphql.Parent() parent: Price): Promise<Article | null> {
+  async getArticle(@graphql.Parent() parent: Price): Promise<Product | null> {
     const result = await this.service.getArticle(parent.id);
 
     if (!result) {

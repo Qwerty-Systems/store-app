@@ -1,9 +1,9 @@
-import { ArticleWhereUniqueInput } from "../article/ArticleWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 
 export type ImageWhereInput = {
-  article?: ArticleWhereUniqueInput;
+  article?: ProductWhereUniqueInput;
   id?: StringFilter;
   image?: JsonFilter;
 };

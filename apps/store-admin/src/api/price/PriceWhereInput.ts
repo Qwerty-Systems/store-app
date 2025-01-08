@@ -1,11 +1,11 @@
-import { ArticleWhereUniqueInput } from "../article/ArticleWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { SupplierListRelationFilter } from "../supplier/SupplierListRelationFilter";
 
 export type PriceWhereInput = {
-  article?: ArticleWhereUniqueInput;
+  article?: ProductWhereUniqueInput;
   effectiveDate?: DateTimeNullableFilter;
   id?: StringFilter;
   priceKenya?: FloatNullableFilter;
