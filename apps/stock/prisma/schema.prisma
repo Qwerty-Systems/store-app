@@ -1,0 +1,120 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String?  @unique
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model Article {
+  additionalImages String?
+  articleCode      String?
+  createdAt        DateTime @default(now())
+  description      String?
+  descriptionEn    String?
+  id               String   @id @default(cuid())
+  imageUrl         String?
+  images           Image[]
+  keywords         String?
+  orders           Order[]
+  prices           Price[]
+  quantityPerUnit  Int?
+  stocks           Stock[]
+  unit             String?
+  updatedAt        DateTime @updatedAt
+}
+
+model Stock {
+  article        Article?   @relation(fields: [articleId], references: [id])
+  articleId      String?
+  availableStock Int?
+  createdAt      DateTime   @default(now())
+  id             String     @id @default(cuid())
+  location       String?
+  locations      Location[]
+  newStock       Int?
+  order          Order?     @relation(name: "OrderOnStocks", fields: [orderId], references: [id])
+  orderId        String?
+  orders         Order[]    @relation(name: "OrdersOnStock")
+  outStock       Int?
+  suppliers      Supplier[]
+  totalStock     Int?
+  updatedAt      DateTime   @updatedAt
+}
+
+model Price {
+  article          Article?   @relation(fields: [articleId], references: [id])
+  articleId        String?
+  createdAt        DateTime   @default(now())
+  effectiveDate    DateTime?
+  id               String     @id @default(cuid())
+  priceKenya       Float?
+  priceNetherlands Float?
+  suppliers        Supplier[]
+  updatedAt        DateTime   @updatedAt
+}
+
+model Order {
+  article       Article?   @relation(fields: [articleId], references: [id])
+  articleId     String?
+  createdAt     DateTime   @default(now())
+  id            String     @id @default(cuid())
+  locations     Location[]
+  orderDate     DateTime?
+  orderLocation String?
+  orderPrice    Float?
+  orderQuantity Int?
+  stock         Stock?     @relation(name: "OrdersOnStock", fields: [stockId], references: [id])
+  stockId       String?
+  stocks        Stock[]    @relation(name: "OrderOnStocks")
+  updatedAt     DateTime   @updatedAt
+}
+
+model Location {
+  address   String?
+  contact   String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String?
+  order     Order?   @relation(fields: [orderId], references: [id])
+  orderId   String?
+  stock     Stock?   @relation(fields: [stockId], references: [id])
+  stockId   String?
+  updatedAt DateTime @updatedAt
+}
+
+model Supplier {
+  contact   String?
+  country   String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String?
+  price     Price?   @relation(fields: [priceId], references: [id])
+  priceId   String?
+  stock     Stock?   @relation(fields: [stockId], references: [id])
+  stockId   String?
+  updatedAt DateTime @updatedAt
+}
+
+model Image {
+  article   Article? @relation(fields: [articleId], references: [id])
+  articleId String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  imageType String?
+  imageUrl  String?
+  updatedAt DateTime @updatedAt
+}

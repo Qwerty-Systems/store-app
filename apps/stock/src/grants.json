@@ -1,0 +1,1442 @@
+[
+  {
+    "role": "admin",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Article",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Article",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Article",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Article",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Article",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Article",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Article",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Article",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Article",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Article",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Article",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Article",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Article",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Article",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Article",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Article",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Article",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Article",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Article",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Article",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Article",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Article",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Article",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Article",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Article",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Article",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Article",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Article",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Article",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Article",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Stock",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Stock",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Stock",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Stock",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Stock",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Stock",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Stock",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Stock",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Stock",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Stock",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Stock",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Stock",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Stock",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Stock",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Stock",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Stock",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Stock",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Stock",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Stock",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Stock",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Stock",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Stock",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Stock",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Stock",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Stock",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Stock",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Stock",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Stock",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Stock",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Stock",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Price",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Price",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Price",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Price",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Price",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Price",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Price",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Price",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Price",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Price",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Price",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Price",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Price",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Price",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Price",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Price",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Price",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Price",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Price",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Price",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Price",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Price",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Price",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Price",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Price",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Price",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Price",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Price",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Price",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Price",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Order",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Order",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Order",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Order",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Order",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Order",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Order",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Order",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Order",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Order",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Order",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Order",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Order",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Order",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Order",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Order",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Order",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Order",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Order",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Order",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Order",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Order",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Order",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Order",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Order",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Order",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Order",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Order",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Order",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Order",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Location",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Location",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Location",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Location",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Location",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Location",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Location",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Location",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Location",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Location",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Location",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Location",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Location",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Location",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Location",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Location",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Location",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Location",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Location",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Location",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Location",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Location",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Location",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Location",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Location",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Location",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Location",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Location",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Location",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Location",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Supplier",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Supplier",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Supplier",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Supplier",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Supplier",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Supplier",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Supplier",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Supplier",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Supplier",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Supplier",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Supplier",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Supplier",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Supplier",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Supplier",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Supplier",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Supplier",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Supplier",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Supplier",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Supplier",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Supplier",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Supplier",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Supplier",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Supplier",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Supplier",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Supplier",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Supplier",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Supplier",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Supplier",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Supplier",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Supplier",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Image",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Image",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Image",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Image",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Image",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Image",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Image",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Image",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Image",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Image",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Image",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Image",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Image",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Image",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Image",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Image",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Image",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Image",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Image",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Image",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Image",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Image",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Image",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Image",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Image",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "finance",
+    "resource": "Image",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "guest",
+    "resource": "Image",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "it",
+    "resource": "Image",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Image",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Image",
+    "action": "read:any",
+    "attributes": "*"
+  }
+]
