@@ -142,7 +142,7 @@ export class ImageResolverBase {
     action: "delete",
     possession: "any",
   })
-  async deleteImage(
+  async deleteImage_(
     @graphql.Args() args: DeleteImageArgs
   ): Promise<Image | null> {
     try {

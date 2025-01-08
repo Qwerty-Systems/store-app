@@ -42,7 +42,7 @@ export class ImageServiceBase {
   async updateImage(args: Prisma.ImageUpdateArgs): Promise<PrismaImage> {
     return this.prisma.image.update(args);
   }
-  async deleteImage(args: Prisma.ImageDeleteArgs): Promise<PrismaImage> {
+  async deleteImage_(args: Prisma.ImageDeleteArgs): Promise<PrismaImage> {
     return this.prisma.image.delete(args);
   }
 

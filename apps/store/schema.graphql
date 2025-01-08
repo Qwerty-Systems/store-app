@@ -281,6 +281,7 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   deleteArticle(where: ArticleWhereUniqueInput!): Article!
   deleteImage(where: ImageWhereUniqueInput!): Image!
+  deleteImage_(where: ImageWhereUniqueInput!): Image!
   deleteLocation(where: LocationWhereUniqueInput!): Location!
   deleteOrder(where: OrderWhereUniqueInput!): Order!
   deletePrice(where: PriceWhereUniqueInput!): Price!
@@ -296,6 +297,7 @@ type Mutation {
   updateStock(data: StockUpdateInput!, where: StockWhereUniqueInput!): Stock!
   updateSupplier(data: SupplierUpdateInput!, where: SupplierWhereUniqueInput!): Supplier!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  uploadImage(file: Upload!, where: ImageWhereUniqueInput!): Image!
 }
 
 type Order {
@@ -697,6 +699,9 @@ input SupplierWhereInput {
 input SupplierWhereUniqueInput {
   id: String!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 type User {
   createdAt: DateTime!

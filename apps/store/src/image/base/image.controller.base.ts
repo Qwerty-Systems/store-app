@@ -203,7 +203,7 @@ export class ImageControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async deleteImage(
+  async deleteImage_(
     @common.Param() params: ImageWhereUniqueInput
   ): Promise<Image | null> {
     try {
