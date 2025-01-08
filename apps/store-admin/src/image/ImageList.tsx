@@ -19,8 +19,7 @@ export const ImageList = (props: ListProps): React.ReactElement => {
         </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
-        <TextField label="imageType" source="imageType" />
-        <TextField label="imageUrl" source="imageUrl" />
+        <TextField label="Image" source="image" />
         <DateField source="updatedAt" label="Updated At" />{" "}
       </Datagrid>
     </List>

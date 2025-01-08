@@ -258,8 +258,7 @@ export class ArticleControllerBase {
 
         createdAt: true,
         id: true,
-        imageType: true,
-        imageUrl: true,
+        image: true,
         updatedAt: true,
       },
     });
