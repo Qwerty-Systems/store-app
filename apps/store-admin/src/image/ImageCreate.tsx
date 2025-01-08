@@ -5,7 +5,6 @@ import {
   CreateProps,
   ReferenceInput,
   SelectInput,
-  TextInput,
 } from "react-admin";
 import { ArticleTitle } from "../article/ArticleTitle";
 
@@ -16,8 +15,7 @@ export const ImageCreate = (props: CreateProps): React.ReactElement => {
         <ReferenceInput source="article.id" reference="Article" label="Article">
           <SelectInput optionText={ArticleTitle} />
         </ReferenceInput>
-        <TextInput label="imageType" source="imageType" />
-        <TextInput label="imageUrl" source="imageUrl" />
+        <div />
       </SimpleForm>
     </Create>
   );

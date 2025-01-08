@@ -10,7 +10,6 @@ export type Article = {
   description: string | null;
   descriptionEn: string | null;
   id: string;
-  imageUrl: string | null;
   images?: Array<Image>;
   keywords: string | null;
   orders?: Array<Order>;

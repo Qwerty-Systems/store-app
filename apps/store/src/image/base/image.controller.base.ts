@@ -65,8 +65,7 @@ export class ImageControllerBase {
 
         createdAt: true,
         id: true,
-        imageType: true,
-        imageUrl: true,
+        image: true,
         updatedAt: true,
       },
     });
@@ -97,8 +96,7 @@ export class ImageControllerBase {
 
         createdAt: true,
         id: true,
-        imageType: true,
-        imageUrl: true,
+        image: true,
         updatedAt: true,
       },
     });
@@ -130,8 +128,7 @@ export class ImageControllerBase {
 
         createdAt: true,
         id: true,
-        imageType: true,
-        imageUrl: true,
+        image: true,
         updatedAt: true,
       },
     });
@@ -180,8 +177,7 @@ export class ImageControllerBase {
 
           createdAt: true,
           id: true,
-          imageType: true,
-          imageUrl: true,
+          image: true,
           updatedAt: true,
         },
       });
@@ -221,8 +217,7 @@ export class ImageControllerBase {
 
           createdAt: true,
           id: true,
-          imageType: true,
-          imageUrl: true,
+          image: true,
           updatedAt: true,
         },
       });

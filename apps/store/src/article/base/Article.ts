@@ -95,18 +95,6 @@ class Article {
 
   @ApiProperty({
     required: false,
-    type: String,
-  })
-  @IsString()
-  @MaxLength(1000)
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  imageUrl!: string | null;
-
-  @ApiProperty({
-    required: false,
     type: () => [Image],
   })
   @ValidateNested()

@@ -8,7 +8,6 @@ export type ArticleUpdateInput = {
   articleCode?: string | null;
   description?: string | null;
   descriptionEn?: string | null;
-  imageUrl?: string | null;
   images?: ImageUpdateManyWithoutArticlesInput;
   keywords?: string | null;
   orders?: OrderUpdateManyWithoutArticlesInput;

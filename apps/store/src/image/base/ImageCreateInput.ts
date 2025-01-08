@@ -12,13 +12,11 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { ArticleWhereUniqueInput } from "../../article/base/ArticleWhereUniqueInput";
-import {
-  ValidateNested,
-  IsOptional,
-  IsString,
-  MaxLength,
-} from "class-validator";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+import { IsJSONValue } from "../../validators";
+import { GraphQLJSON } from "graphql-type-json";
+import { InputJsonValue } from "../../types";
 
 @InputType()
 class ImageCreateInput {
@@ -36,27 +34,13 @@ class ImageCreateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
   })
-  @IsString()
-  @MaxLength(1000)
+  @IsJSONValue()
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => GraphQLJSON, {
     nullable: true,
   })
-  imageType?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @MaxLength(1000)
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  imageUrl?: string | null;
+  image?: InputJsonValue;
 }
 
 export { ImageCreateInput as ImageCreateInput };
