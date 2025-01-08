@@ -9,7 +9,6 @@ type Article {
   description: String
   descriptionEn: String
   id: String!
-  imageUrl: String
   images(orderBy: [ImageOrderByInput!], skip: Float, take: Float, where: ImageWhereInput): [Image!]!
   keywords: String
   orders(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): [Order!]!
@@ -25,7 +24,6 @@ input ArticleCreateInput {
   articleCode: String
   description: String
   descriptionEn: String
-  imageUrl: String
   images: ImageCreateNestedManyWithoutArticlesInput
   keywords: String
   orders: OrderCreateNestedManyWithoutArticlesInput
@@ -42,7 +40,6 @@ input ArticleOrderByInput {
   description: SortOrder
   descriptionEn: SortOrder
   id: SortOrder
-  imageUrl: SortOrder
   keywords: SortOrder
   quantityPerUnit: SortOrder
   unit: SortOrder
@@ -54,7 +51,6 @@ input ArticleUpdateInput {
   articleCode: String
   description: String
   descriptionEn: String
-  imageUrl: String
   images: ImageUpdateManyWithoutArticlesInput
   keywords: String
   orders: OrderUpdateManyWithoutArticlesInput
@@ -70,7 +66,6 @@ input ArticleWhereInput {
   description: StringNullableFilter
   descriptionEn: StringNullableFilter
   id: StringFilter
-  imageUrl: StringNullableFilter
   images: ImageListRelationFilter
   keywords: StringNullableFilter
   orders: OrderListRelationFilter
@@ -120,15 +115,13 @@ type Image {
   article: Article
   createdAt: DateTime!
   id: String!
-  imageType: String
-  imageUrl: String
+  image: JSON
   updatedAt: DateTime!
 }
 
 input ImageCreateInput {
   article: ArticleWhereUniqueInput
-  imageType: String
-  imageUrl: String
+  image: JSON
 }
 
 input ImageCreateNestedManyWithoutArticlesInput {
@@ -145,15 +138,13 @@ input ImageOrderByInput {
   articleId: SortOrder
   createdAt: SortOrder
   id: SortOrder
-  imageType: SortOrder
-  imageUrl: SortOrder
+  image: SortOrder
   updatedAt: SortOrder
 }
 
 input ImageUpdateInput {
   article: ArticleWhereUniqueInput
-  imageType: String
-  imageUrl: String
+  image: JSON
 }
 
 input ImageUpdateManyWithoutArticlesInput {
@@ -165,8 +156,7 @@ input ImageUpdateManyWithoutArticlesInput {
 input ImageWhereInput {
   article: ArticleWhereUniqueInput
   id: StringFilter
-  imageType: StringNullableFilter
-  imageUrl: StringNullableFilter
+  image: JsonFilter
 }
 
 input ImageWhereUniqueInput {
@@ -188,6 +178,16 @@ input IntNullableFilter {
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
 scalar JSON
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
+input JsonFilter {
+  equals: JSONObject
+  not: JSONObject
+}
 
 type Location {
   address: String
