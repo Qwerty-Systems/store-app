@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { ClientRedis } from "@nestjs/microservices";
 import { REDIS_BROKER_CLIENT } from "./constants";
 import { RedisMessage } from "./redisMessage";
-import { AllMessageBrokerTopics } from "./topics";
+// import { AllMessageBrokerTopics } from "./topics";
 
 @Injectable()
 export class RedisProducerService {
@@ -13,7 +13,7 @@ export class RedisProducerService {
   }
 
   async emitMessage(
-    topic: AllMessageBrokerTopics,
+    topic:any /* AllMessageBrokerTopics */,
     message: RedisMessage
   ): Promise<void> {
     return await new Promise((resolve, reject) => {
