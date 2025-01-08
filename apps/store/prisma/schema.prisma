@@ -49,6 +49,18 @@ model Article {
   updatedAt        DateTime @updatedAt
 }
 
+model Price {
+  article          Article?   @relation(fields: [articleId], references: [id])
+  articleId        String?
+  createdAt        DateTime   @default(now())
+  effectiveDate    DateTime?
+  id               String     @id @default(cuid())
+  priceKenya       Float?
+  priceNetherlands Float?
+  suppliers        Supplier[]
+  updatedAt        DateTime   @updatedAt
+}
+
 model Stock {
   article        Article?   @relation(fields: [articleId], references: [id])
   articleId      String?
@@ -67,27 +79,6 @@ model Stock {
   updatedAt      DateTime   @updatedAt
 }
 
-model Price {
-  article          Article?   @relation(fields: [articleId], references: [id])
-  articleId        String?
-  createdAt        DateTime   @default(now())
-  effectiveDate    DateTime?
-  id               String     @id @default(cuid())
-  priceKenya       Float?
-  priceNetherlands Float?
-  suppliers        Supplier[]
-  updatedAt        DateTime   @updatedAt
-}
-
-model Image {
-  article   Article? @relation(fields: [articleId], references: [id])
-  articleId String?
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  image     Json?
-  updatedAt DateTime @updatedAt
-}
-
 model Supplier {
   contact   String?
   country   String?
@@ -98,6 +89,15 @@ model Supplier {
   priceId   String?
   stock     Stock?   @relation(fields: [stockId], references: [id])
   stockId   String?
+  updatedAt DateTime @updatedAt
+}
+
+model Image {
+  article   Article? @relation(fields: [articleId], references: [id])
+  articleId String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  image     Json?
   updatedAt DateTime @updatedAt
 }
 
