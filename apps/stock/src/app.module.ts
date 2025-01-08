@@ -2,19 +2,6 @@ import { RedisModule } from "./redis/redis.module";
 import { Module } from "@nestjs/common";
 import { CacheModule } from "@nestjs/cache-manager";
 import { redisStore } from "cache-manager-ioredis-yet";
-
-import {
-  OpenTelemetryModule,
-  PipeInjector,
-  ControllerInjector,
-  EventEmitterInjector,
-  GraphQLResolverInjector,
-  GuardInjector,
-} from "@amplication/opentelemetry-nestjs";
-
-import { HttpInstrumentation } from "@opentelemetry/instrumentation-http";
-import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-grpc";
-import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-node";
 import { UserModule } from "./user/user.module";
 import { ArticleModule } from "./article/article.module";
 import { StockModule } from "./stock/stock.module";
@@ -99,26 +86,6 @@ import { LoggerModule } from "./logger/logger.module";
       },
 
       inject: [ConfigService],
-    }),
-    OpenTelemetryModule.forRoot({
-      serviceName: "stock",
-      spanProcessor: new BatchSpanProcessor(new OTLPTraceExporter()),
-      instrumentations: [
-        new HttpInstrumentation({
-          requestHook: (span, request) => {
-            if (request.method)
-              span.setAttribute("http.method", request.method);
-          },
-        }),
-      ],
-
-      traceAutoInjectors: [
-        ControllerInjector,
-        EventEmitterInjector,
-        GraphQLResolverInjector,
-        GuardInjector,
-        PipeInjector,
-      ],
     }),
   ],
   providers: [],
