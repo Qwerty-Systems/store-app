@@ -94,17 +94,6 @@ class ArticleOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  imageUrl?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   keywords?: SortOrder;
 
   @ApiProperty({

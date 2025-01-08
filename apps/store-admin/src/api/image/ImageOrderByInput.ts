@@ -4,7 +4,6 @@ export type ImageOrderByInput = {
   articleId?: SortOrder;
   createdAt?: SortOrder;
   id?: SortOrder;
-  imageType?: SortOrder;
-  imageUrl?: SortOrder;
+  image?: SortOrder;
   updatedAt?: SortOrder;
 };

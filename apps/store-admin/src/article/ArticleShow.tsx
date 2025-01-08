@@ -25,7 +25,6 @@ export const ArticleShow = (props: ShowProps): React.ReactElement => {
         <TextField label="description" source="description" />
         <TextField label="descriptionEN" source="descriptionEn" />
         <TextField label="ID" source="id" />
-        <TextField label="imageUrl" source="imageUrl" />
         <TextField label="keywords" source="keywords" />
         <TextField label="quantityPerUnit" source="quantityPerUnit" />
         <TextField label="unit" source="unit" />
@@ -41,8 +40,7 @@ export const ArticleShow = (props: ShowProps): React.ReactElement => {
             </ReferenceField>
             <DateField source="createdAt" label="Created At" />
             <TextField label="ID" source="id" />
-            <TextField label="imageType" source="imageType" />
-            <TextField label="imageUrl" source="imageUrl" />
+            <TextField label="Image" source="image" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>

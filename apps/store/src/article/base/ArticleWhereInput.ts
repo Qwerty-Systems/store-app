@@ -80,17 +80,6 @@ class ArticleWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  imageUrl?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
     type: () => ImageListRelationFilter,
   })
   @ValidateNested()

@@ -27,7 +27,6 @@ export const ArticleEdit = (props: EditProps): React.ReactElement => {
         <TextInput label="articleCode" source="articleCode" />
         <TextInput label="description" source="description" />
         <TextInput label="descriptionEN" source="descriptionEn" />
-        <TextInput label="imageUrl" source="imageUrl" />
         <ReferenceArrayInput source="images" reference="Image">
           <SelectArrayInput
             optionText={ImageTitle}

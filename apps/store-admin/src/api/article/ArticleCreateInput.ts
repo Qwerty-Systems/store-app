@@ -8,7 +8,6 @@ export type ArticleCreateInput = {
   articleCode?: string | null;
   description?: string | null;
   descriptionEn?: string | null;
-  imageUrl?: string | null;
   images?: ImageCreateNestedManyWithoutArticlesInput;
   keywords?: string | null;
   orders?: OrderCreateNestedManyWithoutArticlesInput;

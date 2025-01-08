@@ -7,7 +7,6 @@ export type ArticleOrderByInput = {
   description?: SortOrder;
   descriptionEn?: SortOrder;
   id?: SortOrder;
-  imageUrl?: SortOrder;
   keywords?: SortOrder;
   quantityPerUnit?: SortOrder;
   unit?: SortOrder;
