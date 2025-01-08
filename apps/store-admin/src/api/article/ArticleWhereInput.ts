@@ -12,7 +12,6 @@ export type ArticleWhereInput = {
   description?: StringNullableFilter;
   descriptionEn?: StringNullableFilter;
   id?: StringFilter;
-  imageUrl?: StringNullableFilter;
   images?: ImageListRelationFilter;
   keywords?: StringNullableFilter;
   orders?: OrderListRelationFilter;

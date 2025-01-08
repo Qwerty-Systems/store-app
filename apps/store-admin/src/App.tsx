@@ -9,14 +9,14 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { ArticleList } from "./article/ArticleList";
-import { ArticleCreate } from "./article/ArticleCreate";
-import { ArticleEdit } from "./article/ArticleEdit";
-import { ArticleShow } from "./article/ArticleShow";
 import { LocationList } from "./location/LocationList";
 import { LocationCreate } from "./location/LocationCreate";
 import { LocationEdit } from "./location/LocationEdit";
 import { LocationShow } from "./location/LocationShow";
+import { ArticleList } from "./article/ArticleList";
+import { ArticleCreate } from "./article/ArticleCreate";
+import { ArticleEdit } from "./article/ArticleEdit";
+import { ArticleShow } from "./article/ArticleShow";
 import { StockList } from "./stock/StockList";
 import { StockCreate } from "./stock/StockCreate";
 import { StockEdit } from "./stock/StockEdit";
@@ -58,18 +58,18 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
-          name="Article"
-          list={ArticleList}
-          edit={ArticleEdit}
-          create={ArticleCreate}
-          show={ArticleShow}
-        />
-        <Resource
           name="Location"
           list={LocationList}
           edit={LocationEdit}
           create={LocationCreate}
           show={LocationShow}
+        />
+        <Resource
+          name="Article"
+          list={ArticleList}
+          edit={ArticleEdit}
+          create={ArticleCreate}
+          show={ArticleShow}
         />
         <Resource
           name="Stock"

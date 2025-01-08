@@ -19,24 +19,6 @@ model User {
   username  String   @unique
 }
 
-model Article {
-  additionalImages String?
-  articleCode      String?
-  createdAt        DateTime @default(now())
-  description      String?
-  descriptionEn    String?
-  id               String   @id @default(cuid())
-  imageUrl         String?
-  images           Image[]
-  keywords         String?
-  orders           Order[]
-  prices           Price[]
-  quantityPerUnit  Int?
-  stocks           Stock[]
-  unit             String?
-  updatedAt        DateTime @updatedAt
-}
-
 model Location {
   address   String?
   contact   String?
@@ -48,6 +30,23 @@ model Location {
   stock     Stock?   @relation(fields: [stockId], references: [id])
   stockId   String?
   updatedAt DateTime @updatedAt
+}
+
+model Article {
+  additionalImages String?
+  articleCode      String?
+  createdAt        DateTime @default(now())
+  description      String?
+  descriptionEn    String?
+  id               String   @id @default(cuid())
+  images           Image[]
+  keywords         String?
+  orders           Order[]
+  prices           Price[]
+  quantityPerUnit  Int?
+  stocks           Stock[]
+  unit             String?
+  updatedAt        DateTime @updatedAt
 }
 
 model Stock {

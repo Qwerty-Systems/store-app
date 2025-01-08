@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "./user/user.module";
-import { ArticleModule } from "./article/article.module";
 import { LocationModule } from "./location/location.module";
+import { ArticleModule } from "./article/article.module";
 import { StockModule } from "./stock/stock.module";
 import { PriceModule } from "./price/price.module";
 import { ImageModule } from "./image/image.module";
@@ -25,8 +25,8 @@ import { AuthModule } from "./auth/auth.module";
     ACLModule,
     AuthModule,
     UserModule,
-    ArticleModule,
     LocationModule,
+    ArticleModule,
     StockModule,
     PriceModule,
     ImageModule,

@@ -31,61 +31,61 @@
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Article",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Article",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Article",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Article",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Article",
     "action": "read:any",
     "attributes": "*"
   },
