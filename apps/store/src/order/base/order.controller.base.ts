@@ -26,6 +26,12 @@ import { Order } from "./Order";
 import { OrderFindManyArgs } from "./OrderFindManyArgs";
 import { OrderWhereUniqueInput } from "./OrderWhereUniqueInput";
 import { OrderUpdateInput } from "./OrderUpdateInput";
+import { LocationFindManyArgs } from "../../location/base/LocationFindManyArgs";
+import { Location } from "../../location/base/Location";
+import { LocationWhereUniqueInput } from "../../location/base/LocationWhereUniqueInput";
+import { StockFindManyArgs } from "../../stock/base/StockFindManyArgs";
+import { Stock } from "../../stock/base/Stock";
+import { StockWhereUniqueInput } from "../../stock/base/StockWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -47,10 +53,41 @@ export class OrderControllerBase {
   })
   async createOrder(@common.Body() data: OrderCreateInput): Promise<Order> {
     return await this.service.createOrder({
-      data: data,
+      data: {
+        ...data,
+
+        article: data.article
+          ? {
+              connect: data.article,
+            }
+          : undefined,
+
+        stock: data.stock
+          ? {
+              connect: data.stock,
+            }
+          : undefined,
+      },
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
+        orderDate: true,
+        orderLocation: true,
+        orderPrice: true,
+        orderQuantity: true,
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -73,8 +110,25 @@ export class OrderControllerBase {
     return this.service.orders({
       ...args,
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
+        orderDate: true,
+        orderLocation: true,
+        orderPrice: true,
+        orderQuantity: true,
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -98,8 +152,25 @@ export class OrderControllerBase {
     const result = await this.service.order({
       where: params,
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
+        orderDate: true,
+        orderLocation: true,
+        orderPrice: true,
+        orderQuantity: true,
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -130,10 +201,41 @@ export class OrderControllerBase {
     try {
       return await this.service.updateOrder({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          article: data.article
+            ? {
+                connect: data.article,
+              }
+            : undefined,
+
+          stock: data.stock
+            ? {
+                connect: data.stock,
+              }
+            : undefined,
+        },
         select: {
+          article: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
+          orderDate: true,
+          orderLocation: true,
+          orderPrice: true,
+          orderQuantity: true,
+
+          stock: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });
@@ -165,8 +267,25 @@ export class OrderControllerBase {
       return await this.service.deleteOrder({
         where: params,
         select: {
+          article: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
+          orderDate: true,
+          orderLocation: true,
+          orderPrice: true,
+          orderQuantity: true,
+
+          stock: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });
@@ -178,5 +297,229 @@ export class OrderControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/locations")
+  @ApiNestedQuery(LocationFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Location",
+    action: "read",
+    possession: "any",
+  })
+  async findLocations(
+    @common.Req() request: Request,
+    @common.Param() params: OrderWhereUniqueInput
+  ): Promise<Location[]> {
+    const query = plainToClass(LocationFindManyArgs, request.query);
+    const results = await this.service.findLocations(params.id, {
+      ...query,
+      select: {
+        address: true,
+        contact: true,
+        createdAt: true,
+        id: true,
+        name: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/locations")
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "update",
+    possession: "any",
+  })
+  async connectLocations(
+    @common.Param() params: OrderWhereUniqueInput,
+    @common.Body() body: LocationWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      locations: {
+        connect: body,
+      },
+    };
+    await this.service.updateOrder({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/locations")
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "update",
+    possession: "any",
+  })
+  async updateLocations(
+    @common.Param() params: OrderWhereUniqueInput,
+    @common.Body() body: LocationWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      locations: {
+        set: body,
+      },
+    };
+    await this.service.updateOrder({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/locations")
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectLocations(
+    @common.Param() params: OrderWhereUniqueInput,
+    @common.Body() body: LocationWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      locations: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateOrder({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/stocks")
+  @ApiNestedQuery(StockFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "read",
+    possession: "any",
+  })
+  async findStocks(
+    @common.Req() request: Request,
+    @common.Param() params: OrderWhereUniqueInput
+  ): Promise<Stock[]> {
+    const query = plainToClass(StockFindManyArgs, request.query);
+    const results = await this.service.findStocks(params.id, {
+      ...query,
+      select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
+        availableStock: true,
+        createdAt: true,
+        id: true,
+        location: true,
+        newStock: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        outStock: true,
+        totalStock: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/stocks")
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "update",
+    possession: "any",
+  })
+  async connectStocks(
+    @common.Param() params: OrderWhereUniqueInput,
+    @common.Body() body: StockWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      stocks: {
+        connect: body,
+      },
+    };
+    await this.service.updateOrder({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/stocks")
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "update",
+    possession: "any",
+  })
+  async updateStocks(
+    @common.Param() params: OrderWhereUniqueInput,
+    @common.Body() body: StockWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      stocks: {
+        set: body,
+      },
+    };
+    await this.service.updateOrder({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/stocks")
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectStocks(
+    @common.Param() params: OrderWhereUniqueInput,
+    @common.Body() body: StockWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      stocks: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateOrder({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

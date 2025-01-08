@@ -18,11 +18,19 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Order } from "./Order";
 import { OrderCountArgs } from "./OrderCountArgs";
 import { OrderFindManyArgs } from "./OrderFindManyArgs";
 import { OrderFindUniqueArgs } from "./OrderFindUniqueArgs";
+import { CreateOrderArgs } from "./CreateOrderArgs";
+import { UpdateOrderArgs } from "./UpdateOrderArgs";
 import { DeleteOrderArgs } from "./DeleteOrderArgs";
+import { LocationFindManyArgs } from "../../location/base/LocationFindManyArgs";
+import { Location } from "../../location/base/Location";
+import { StockFindManyArgs } from "../../stock/base/StockFindManyArgs";
+import { Stock } from "../../stock/base/Stock";
+import { Article } from "../../article/base/Article";
 import { OrderService } from "../order.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Order)
@@ -75,6 +83,73 @@ export class OrderResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Order)
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "create",
+    possession: "any",
+  })
+  async createOrder(@graphql.Args() args: CreateOrderArgs): Promise<Order> {
+    return await this.service.createOrder({
+      ...args,
+      data: {
+        ...args.data,
+
+        article: args.data.article
+          ? {
+              connect: args.data.article,
+            }
+          : undefined,
+
+        stock: args.data.stock
+          ? {
+              connect: args.data.stock,
+            }
+          : undefined,
+      },
+    });
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Order)
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "update",
+    possession: "any",
+  })
+  async updateOrder(
+    @graphql.Args() args: UpdateOrderArgs
+  ): Promise<Order | null> {
+    try {
+      return await this.service.updateOrder({
+        ...args,
+        data: {
+          ...args.data,
+
+          article: args.data.article
+            ? {
+                connect: args.data.article,
+              }
+            : undefined,
+
+          stock: args.data.stock
+            ? {
+                connect: args.data.stock,
+              }
+            : undefined,
+        },
+      });
+    } catch (error) {
+      if (isRecordNotFoundError(error)) {
+        throw new GraphQLError(
+          `No resource was found for ${JSON.stringify(args.where)}`
+        );
+      }
+      throw error;
+    }
+  }
+
   @graphql.Mutation(() => Order)
   @nestAccessControl.UseRoles({
     resource: "Order",
@@ -94,5 +169,83 @@ export class OrderResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Location], { name: "locations" })
+  @nestAccessControl.UseRoles({
+    resource: "Location",
+    action: "read",
+    possession: "any",
+  })
+  async findLocations(
+    @graphql.Parent() parent: Order,
+    @graphql.Args() args: LocationFindManyArgs
+  ): Promise<Location[]> {
+    const results = await this.service.findLocations(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Stock], { name: "stocks" })
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "read",
+    possession: "any",
+  })
+  async findStocks(
+    @graphql.Parent() parent: Order,
+    @graphql.Args() args: StockFindManyArgs
+  ): Promise<Stock[]> {
+    const results = await this.service.findStocks(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Article, {
+    nullable: true,
+    name: "article",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "read",
+    possession: "any",
+  })
+  async getArticle(@graphql.Parent() parent: Order): Promise<Article | null> {
+    const result = await this.service.getArticle(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Stock, {
+    nullable: true,
+    name: "stock",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "read",
+    possession: "any",
+  })
+  async getStock(@graphql.Parent() parent: Order): Promise<Stock | null> {
+    const result = await this.service.getStock(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

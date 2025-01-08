@@ -11,11 +11,27 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString } from "class-validator";
+import { Article } from "../../article/base/Article";
+import {
+  ValidateNested,
+  IsOptional,
+  IsDate,
+  IsString,
+  MaxLength,
+} from "class-validator";
 import { Type } from "class-transformer";
 
 @ObjectType()
 class Image {
+  @ApiProperty({
+    required: false,
+    type: () => Article,
+  })
+  @ValidateNested()
+  @Type(() => Article)
+  @IsOptional()
+  article?: Article | null;
+
   @ApiProperty({
     required: true,
   })
@@ -31,6 +47,30 @@ class Image {
   @IsString()
   @Field(() => String)
   id!: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  imageType!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  imageUrl!: string | null;
 
   @ApiProperty({
     required: true,

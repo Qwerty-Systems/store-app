@@ -49,10 +49,40 @@ export class LocationControllerBase {
     @common.Body() data: LocationCreateInput
   ): Promise<Location> {
     return await this.service.createLocation({
-      data: data,
+      data: {
+        ...data,
+
+        order: data.order
+          ? {
+              connect: data.order,
+            }
+          : undefined,
+
+        stock: data.stock
+          ? {
+              connect: data.stock,
+            }
+          : undefined,
+      },
       select: {
+        address: true,
+        contact: true,
         createdAt: true,
         id: true,
+        name: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -75,8 +105,24 @@ export class LocationControllerBase {
     return this.service.locations({
       ...args,
       select: {
+        address: true,
+        contact: true,
         createdAt: true,
         id: true,
+        name: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -100,8 +146,24 @@ export class LocationControllerBase {
     const result = await this.service.location({
       where: params,
       select: {
+        address: true,
+        contact: true,
         createdAt: true,
         id: true,
+        name: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -132,10 +194,40 @@ export class LocationControllerBase {
     try {
       return await this.service.updateLocation({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          order: data.order
+            ? {
+                connect: data.order,
+              }
+            : undefined,
+
+          stock: data.stock
+            ? {
+                connect: data.stock,
+              }
+            : undefined,
+        },
         select: {
+          address: true,
+          contact: true,
           createdAt: true,
           id: true,
+          name: true,
+
+          order: {
+            select: {
+              id: true,
+            },
+          },
+
+          stock: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });
@@ -167,8 +259,24 @@ export class LocationControllerBase {
       return await this.service.deleteLocation({
         where: params,
         select: {
+          address: true,
+          contact: true,
           createdAt: true,
           id: true,
+          name: true,
+
+          order: {
+            select: {
+              id: true,
+            },
+          },
+
+          stock: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });

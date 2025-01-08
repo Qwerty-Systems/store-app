@@ -18,11 +18,16 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Supplier } from "./Supplier";
 import { SupplierCountArgs } from "./SupplierCountArgs";
 import { SupplierFindManyArgs } from "./SupplierFindManyArgs";
 import { SupplierFindUniqueArgs } from "./SupplierFindUniqueArgs";
+import { CreateSupplierArgs } from "./CreateSupplierArgs";
+import { UpdateSupplierArgs } from "./UpdateSupplierArgs";
 import { DeleteSupplierArgs } from "./DeleteSupplierArgs";
+import { Price } from "../../price/base/Price";
+import { Stock } from "../../stock/base/Stock";
 import { SupplierService } from "../supplier.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Supplier)
@@ -77,6 +82,75 @@ export class SupplierResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Supplier)
+  @nestAccessControl.UseRoles({
+    resource: "Supplier",
+    action: "create",
+    possession: "any",
+  })
+  async createSupplier(
+    @graphql.Args() args: CreateSupplierArgs
+  ): Promise<Supplier> {
+    return await this.service.createSupplier({
+      ...args,
+      data: {
+        ...args.data,
+
+        price: args.data.price
+          ? {
+              connect: args.data.price,
+            }
+          : undefined,
+
+        stock: args.data.stock
+          ? {
+              connect: args.data.stock,
+            }
+          : undefined,
+      },
+    });
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Supplier)
+  @nestAccessControl.UseRoles({
+    resource: "Supplier",
+    action: "update",
+    possession: "any",
+  })
+  async updateSupplier(
+    @graphql.Args() args: UpdateSupplierArgs
+  ): Promise<Supplier | null> {
+    try {
+      return await this.service.updateSupplier({
+        ...args,
+        data: {
+          ...args.data,
+
+          price: args.data.price
+            ? {
+                connect: args.data.price,
+              }
+            : undefined,
+
+          stock: args.data.stock
+            ? {
+                connect: args.data.stock,
+              }
+            : undefined,
+        },
+      });
+    } catch (error) {
+      if (isRecordNotFoundError(error)) {
+        throw new GraphQLError(
+          `No resource was found for ${JSON.stringify(args.where)}`
+        );
+      }
+      throw error;
+    }
+  }
+
   @graphql.Mutation(() => Supplier)
   @nestAccessControl.UseRoles({
     resource: "Supplier",
@@ -96,5 +170,43 @@ export class SupplierResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Price, {
+    nullable: true,
+    name: "price",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Price",
+    action: "read",
+    possession: "any",
+  })
+  async getPrice(@graphql.Parent() parent: Supplier): Promise<Price | null> {
+    const result = await this.service.getPrice(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Stock, {
+    nullable: true,
+    name: "stock",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "read",
+    possession: "any",
+  })
+  async getStock(@graphql.Parent() parent: Supplier): Promise<Stock | null> {
+    const result = await this.service.getStock(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

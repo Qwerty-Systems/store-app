@@ -1,7 +1,7 @@
 import { Supplier as TSupplier } from "../api/supplier/Supplier";
 
-export const SUPPLIER_TITLE_FIELD = "id";
+export const SUPPLIER_TITLE_FIELD = "name";
 
 export const SupplierTitle = (record: TSupplier): string => {
-  return record.id?.toString() || String(record.id);
+  return record.name?.toString() || String(record.id);
 };

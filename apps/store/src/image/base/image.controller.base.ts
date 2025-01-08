@@ -47,10 +47,26 @@ export class ImageControllerBase {
   })
   async createImage(@common.Body() data: ImageCreateInput): Promise<Image> {
     return await this.service.createImage({
-      data: data,
+      data: {
+        ...data,
+
+        article: data.article
+          ? {
+              connect: data.article,
+            }
+          : undefined,
+      },
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
+        imageType: true,
+        imageUrl: true,
         updatedAt: true,
       },
     });
@@ -73,8 +89,16 @@ export class ImageControllerBase {
     return this.service.images({
       ...args,
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
+        imageType: true,
+        imageUrl: true,
         updatedAt: true,
       },
     });
@@ -98,8 +122,16 @@ export class ImageControllerBase {
     const result = await this.service.image({
       where: params,
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
+        imageType: true,
+        imageUrl: true,
         updatedAt: true,
       },
     });
@@ -130,10 +162,26 @@ export class ImageControllerBase {
     try {
       return await this.service.updateImage({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          article: data.article
+            ? {
+                connect: data.article,
+              }
+            : undefined,
+        },
         select: {
+          article: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
+          imageType: true,
+          imageUrl: true,
           updatedAt: true,
         },
       });
@@ -165,8 +213,16 @@ export class ImageControllerBase {
       return await this.service.deleteImage({
         where: params,
         select: {
+          article: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
+          imageType: true,
+          imageUrl: true,
           updatedAt: true,
         },
       });

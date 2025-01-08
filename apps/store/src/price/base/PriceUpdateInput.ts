@@ -9,5 +9,82 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-class PriceUpdateInput {}
+import { InputType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { ArticleWhereUniqueInput } from "../../article/base/ArticleWhereUniqueInput";
+import {
+  ValidateNested,
+  IsOptional,
+  IsDate,
+  IsNumber,
+  Min,
+  Max,
+} from "class-validator";
+import { Type } from "class-transformer";
+import { SupplierUpdateManyWithoutPricesInput } from "./SupplierUpdateManyWithoutPricesInput";
+
+@InputType()
+class PriceUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => ArticleWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ArticleWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ArticleWhereUniqueInput, {
+    nullable: true,
+  })
+  article?: ArticleWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  effectiveDate?: Date | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  priceKenya?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  priceNetherlands?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => SupplierUpdateManyWithoutPricesInput,
+  })
+  @ValidateNested()
+  @Type(() => SupplierUpdateManyWithoutPricesInput)
+  @IsOptional()
+  @Field(() => SupplierUpdateManyWithoutPricesInput, {
+    nullable: true,
+  })
+  suppliers?: SupplierUpdateManyWithoutPricesInput;
+}
+
 export { PriceUpdateInput as PriceUpdateInput };

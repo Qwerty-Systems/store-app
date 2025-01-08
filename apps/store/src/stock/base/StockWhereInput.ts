@@ -11,12 +11,42 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
+import { ArticleWhereUniqueInput } from "../../article/base/ArticleWhereUniqueInput";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
+import { IntNullableFilter } from "../../util/IntNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { LocationListRelationFilter } from "../../location/base/LocationListRelationFilter";
+import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
+import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
+import { SupplierListRelationFilter } from "../../supplier/base/SupplierListRelationFilter";
 
 @InputType()
 class StockWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => ArticleWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ArticleWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ArticleWhereUniqueInput, {
+    nullable: true,
+  })
+  article?: ArticleWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  availableStock?: IntNullableFilter;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -27,6 +57,98 @@ class StockWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  location?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => LocationListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => LocationListRelationFilter)
+  @IsOptional()
+  @Field(() => LocationListRelationFilter, {
+    nullable: true,
+  })
+  locations?: LocationListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  newStock?: IntNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => OrderWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => OrderWhereUniqueInput)
+  @IsOptional()
+  @Field(() => OrderWhereUniqueInput, {
+    nullable: true,
+  })
+  order?: OrderWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => OrderListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => OrderListRelationFilter)
+  @IsOptional()
+  @Field(() => OrderListRelationFilter, {
+    nullable: true,
+  })
+  orders?: OrderListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  outStock?: IntNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => SupplierListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => SupplierListRelationFilter)
+  @IsOptional()
+  @Field(() => SupplierListRelationFilter, {
+    nullable: true,
+  })
+  suppliers?: SupplierListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  totalStock?: IntNullableFilter;
 }
 
 export { StockWhereInput as StockWhereInput };

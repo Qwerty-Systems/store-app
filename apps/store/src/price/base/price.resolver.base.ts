@@ -18,11 +18,17 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Price } from "./Price";
 import { PriceCountArgs } from "./PriceCountArgs";
 import { PriceFindManyArgs } from "./PriceFindManyArgs";
 import { PriceFindUniqueArgs } from "./PriceFindUniqueArgs";
+import { CreatePriceArgs } from "./CreatePriceArgs";
+import { UpdatePriceArgs } from "./UpdatePriceArgs";
 import { DeletePriceArgs } from "./DeletePriceArgs";
+import { SupplierFindManyArgs } from "../../supplier/base/SupplierFindManyArgs";
+import { Supplier } from "../../supplier/base/Supplier";
+import { Article } from "../../article/base/Article";
 import { PriceService } from "../price.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Price)
@@ -75,6 +81,61 @@ export class PriceResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Price)
+  @nestAccessControl.UseRoles({
+    resource: "Price",
+    action: "create",
+    possession: "any",
+  })
+  async createPrice(@graphql.Args() args: CreatePriceArgs): Promise<Price> {
+    return await this.service.createPrice({
+      ...args,
+      data: {
+        ...args.data,
+
+        article: args.data.article
+          ? {
+              connect: args.data.article,
+            }
+          : undefined,
+      },
+    });
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Price)
+  @nestAccessControl.UseRoles({
+    resource: "Price",
+    action: "update",
+    possession: "any",
+  })
+  async updatePrice(
+    @graphql.Args() args: UpdatePriceArgs
+  ): Promise<Price | null> {
+    try {
+      return await this.service.updatePrice({
+        ...args,
+        data: {
+          ...args.data,
+
+          article: args.data.article
+            ? {
+                connect: args.data.article,
+              }
+            : undefined,
+        },
+      });
+    } catch (error) {
+      if (isRecordNotFoundError(error)) {
+        throw new GraphQLError(
+          `No resource was found for ${JSON.stringify(args.where)}`
+        );
+      }
+      throw error;
+    }
+  }
+
   @graphql.Mutation(() => Price)
   @nestAccessControl.UseRoles({
     resource: "Price",
@@ -94,5 +155,44 @@ export class PriceResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Supplier], { name: "suppliers" })
+  @nestAccessControl.UseRoles({
+    resource: "Supplier",
+    action: "read",
+    possession: "any",
+  })
+  async findSuppliers(
+    @graphql.Parent() parent: Price,
+    @graphql.Args() args: SupplierFindManyArgs
+  ): Promise<Supplier[]> {
+    const results = await this.service.findSuppliers(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Article, {
+    nullable: true,
+    name: "article",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "read",
+    possession: "any",
+  })
+  async getArticle(@graphql.Parent() parent: Price): Promise<Article | null> {
+    const result = await this.service.getArticle(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

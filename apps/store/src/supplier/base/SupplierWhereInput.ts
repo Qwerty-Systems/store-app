@@ -11,12 +11,37 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
+import { IsOptional, ValidateNested } from "class-validator";
+import { StringFilter } from "../../util/StringFilter";
+import { PriceWhereUniqueInput } from "../../price/base/PriceWhereUniqueInput";
+import { StockWhereUniqueInput } from "../../stock/base/StockWhereUniqueInput";
 
 @InputType()
 class SupplierWhereInput {
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  contact?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  country?: StringNullableFilter;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -27,6 +52,41 @@ class SupplierWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  name?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => PriceWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => PriceWhereUniqueInput)
+  @IsOptional()
+  @Field(() => PriceWhereUniqueInput, {
+    nullable: true,
+  })
+  price?: PriceWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => StockWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => StockWhereUniqueInput)
+  @IsOptional()
+  @Field(() => StockWhereUniqueInput, {
+    nullable: true,
+  })
+  stock?: StockWhereUniqueInput;
 }
 
 export { SupplierWhereInput as SupplierWhereInput };

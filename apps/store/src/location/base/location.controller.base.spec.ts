@@ -18,25 +18,37 @@ import { LocationService } from "../location.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  address: "exampleAddress",
+  contact: "exampleContact",
   createdAt: new Date(),
   id: "exampleId",
+  name: "exampleName",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  address: "exampleAddress",
+  contact: "exampleContact",
   createdAt: new Date(),
   id: "exampleId",
+  name: "exampleName",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    address: "exampleAddress",
+    contact: "exampleContact",
     createdAt: new Date(),
     id: "exampleId",
+    name: "exampleName",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  address: "exampleAddress",
+  contact: "exampleContact",
   createdAt: new Date(),
   id: "exampleId",
+  name: "exampleName",
   updatedAt: new Date(),
 };
 

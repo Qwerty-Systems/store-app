@@ -11,11 +11,43 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString } from "class-validator";
+import {
+  IsString,
+  MaxLength,
+  IsOptional,
+  IsDate,
+  ValidateNested,
+} from "class-validator";
 import { Type } from "class-transformer";
+import { Price } from "../../price/base/Price";
+import { Stock } from "../../stock/base/Stock";
 
 @ObjectType()
 class Supplier {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  contact!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  country!: string | null;
+
   @ApiProperty({
     required: true,
   })
@@ -31,6 +63,36 @@ class Supplier {
   @IsString()
   @Field(() => String)
   id!: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  name!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => Price,
+  })
+  @ValidateNested()
+  @Type(() => Price)
+  @IsOptional()
+  price?: Price | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => Stock,
+  })
+  @ValidateNested()
+  @Type(() => Stock)
+  @IsOptional()
+  stock?: Stock | null;
 
   @ApiProperty({
     required: true,

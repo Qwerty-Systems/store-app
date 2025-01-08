@@ -19,24 +19,36 @@ const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
   createdAt: new Date(),
+  effectiveDate: new Date(),
   id: "exampleId",
+  priceKenya: 42.42,
+  priceNetherlands: 42.42,
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
   createdAt: new Date(),
+  effectiveDate: new Date(),
   id: "exampleId",
+  priceKenya: 42.42,
+  priceNetherlands: 42.42,
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
     createdAt: new Date(),
+    effectiveDate: new Date(),
     id: "exampleId",
+    priceKenya: 42.42,
+    priceNetherlands: 42.42,
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
   createdAt: new Date(),
+  effectiveDate: new Date(),
   id: "exampleId",
+  priceKenya: 42.42,
+  priceNetherlands: 42.42,
   updatedAt: new Date(),
 };
 
@@ -123,6 +135,7 @@ describe("Price", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        effectiveDate: CREATE_RESULT.effectiveDate.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -135,6 +148,7 @@ describe("Price", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+          effectiveDate: FIND_MANY_RESULT[0].effectiveDate.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
@@ -158,6 +172,7 @@ describe("Price", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+        effectiveDate: FIND_ONE_RESULT.effectiveDate.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -171,6 +186,7 @@ describe("Price", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        effectiveDate: CREATE_RESULT.effectiveDate.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       })
       .then(function () {

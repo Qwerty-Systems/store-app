@@ -11,12 +11,39 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
+import { ArticleWhereUniqueInput } from "../../article/base/ArticleWhereUniqueInput";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
+import { FloatNullableFilter } from "../../util/FloatNullableFilter";
+import { SupplierListRelationFilter } from "../../supplier/base/SupplierListRelationFilter";
 
 @InputType()
 class PriceWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => ArticleWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ArticleWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ArticleWhereUniqueInput, {
+    nullable: true,
+  })
+  article?: ArticleWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  effectiveDate?: DateTimeNullableFilter;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -27,6 +54,40 @@ class PriceWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: FloatNullableFilter,
+  })
+  @Type(() => FloatNullableFilter)
+  @IsOptional()
+  @Field(() => FloatNullableFilter, {
+    nullable: true,
+  })
+  priceKenya?: FloatNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: FloatNullableFilter,
+  })
+  @Type(() => FloatNullableFilter)
+  @IsOptional()
+  @Field(() => FloatNullableFilter, {
+    nullable: true,
+  })
+  priceNetherlands?: FloatNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => SupplierListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => SupplierListRelationFilter)
+  @IsOptional()
+  @Field(() => SupplierListRelationFilter, {
+    nullable: true,
+  })
+  suppliers?: SupplierListRelationFilter;
 }
 
 export { PriceWhereInput as PriceWhereInput };

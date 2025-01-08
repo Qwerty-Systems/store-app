@@ -18,11 +18,15 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Image } from "./Image";
 import { ImageCountArgs } from "./ImageCountArgs";
 import { ImageFindManyArgs } from "./ImageFindManyArgs";
 import { ImageFindUniqueArgs } from "./ImageFindUniqueArgs";
+import { CreateImageArgs } from "./CreateImageArgs";
+import { UpdateImageArgs } from "./UpdateImageArgs";
 import { DeleteImageArgs } from "./DeleteImageArgs";
+import { Article } from "../../article/base/Article";
 import { ImageService } from "../image.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Image)
@@ -75,6 +79,61 @@ export class ImageResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Image)
+  @nestAccessControl.UseRoles({
+    resource: "Image",
+    action: "create",
+    possession: "any",
+  })
+  async createImage(@graphql.Args() args: CreateImageArgs): Promise<Image> {
+    return await this.service.createImage({
+      ...args,
+      data: {
+        ...args.data,
+
+        article: args.data.article
+          ? {
+              connect: args.data.article,
+            }
+          : undefined,
+      },
+    });
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Image)
+  @nestAccessControl.UseRoles({
+    resource: "Image",
+    action: "update",
+    possession: "any",
+  })
+  async updateImage(
+    @graphql.Args() args: UpdateImageArgs
+  ): Promise<Image | null> {
+    try {
+      return await this.service.updateImage({
+        ...args,
+        data: {
+          ...args.data,
+
+          article: args.data.article
+            ? {
+                connect: args.data.article,
+              }
+            : undefined,
+        },
+      });
+    } catch (error) {
+      if (isRecordNotFoundError(error)) {
+        throw new GraphQLError(
+          `No resource was found for ${JSON.stringify(args.where)}`
+        );
+      }
+      throw error;
+    }
+  }
+
   @graphql.Mutation(() => Image)
   @nestAccessControl.UseRoles({
     resource: "Image",
@@ -94,5 +153,24 @@ export class ImageResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Article, {
+    nullable: true,
+    name: "article",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "read",
+    possession: "any",
+  })
+  async getArticle(@graphql.Parent() parent: Image): Promise<Article | null> {
+    const result = await this.service.getArticle(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

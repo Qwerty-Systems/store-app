@@ -26,6 +26,9 @@ import { Price } from "./Price";
 import { PriceFindManyArgs } from "./PriceFindManyArgs";
 import { PriceWhereUniqueInput } from "./PriceWhereUniqueInput";
 import { PriceUpdateInput } from "./PriceUpdateInput";
+import { SupplierFindManyArgs } from "../../supplier/base/SupplierFindManyArgs";
+import { Supplier } from "../../supplier/base/Supplier";
+import { SupplierWhereUniqueInput } from "../../supplier/base/SupplierWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -47,10 +50,27 @@ export class PriceControllerBase {
   })
   async createPrice(@common.Body() data: PriceCreateInput): Promise<Price> {
     return await this.service.createPrice({
-      data: data,
+      data: {
+        ...data,
+
+        article: data.article
+          ? {
+              connect: data.article,
+            }
+          : undefined,
+      },
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
+        effectiveDate: true,
         id: true,
+        priceKenya: true,
+        priceNetherlands: true,
         updatedAt: true,
       },
     });
@@ -73,8 +93,17 @@ export class PriceControllerBase {
     return this.service.prices({
       ...args,
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
+        effectiveDate: true,
         id: true,
+        priceKenya: true,
+        priceNetherlands: true,
         updatedAt: true,
       },
     });
@@ -98,8 +127,17 @@ export class PriceControllerBase {
     const result = await this.service.price({
       where: params,
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
+        effectiveDate: true,
         id: true,
+        priceKenya: true,
+        priceNetherlands: true,
         updatedAt: true,
       },
     });
@@ -130,10 +168,27 @@ export class PriceControllerBase {
     try {
       return await this.service.updatePrice({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          article: data.article
+            ? {
+                connect: data.article,
+              }
+            : undefined,
+        },
         select: {
+          article: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
+          effectiveDate: true,
           id: true,
+          priceKenya: true,
+          priceNetherlands: true,
           updatedAt: true,
         },
       });
@@ -165,8 +220,17 @@ export class PriceControllerBase {
       return await this.service.deletePrice({
         where: params,
         select: {
+          article: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
+          effectiveDate: true,
           id: true,
+          priceKenya: true,
+          priceNetherlands: true,
           updatedAt: true,
         },
       });
@@ -178,5 +242,116 @@ export class PriceControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/suppliers")
+  @ApiNestedQuery(SupplierFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Supplier",
+    action: "read",
+    possession: "any",
+  })
+  async findSuppliers(
+    @common.Req() request: Request,
+    @common.Param() params: PriceWhereUniqueInput
+  ): Promise<Supplier[]> {
+    const query = plainToClass(SupplierFindManyArgs, request.query);
+    const results = await this.service.findSuppliers(params.id, {
+      ...query,
+      select: {
+        contact: true,
+        country: true,
+        createdAt: true,
+        id: true,
+        name: true,
+
+        price: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/suppliers")
+  @nestAccessControl.UseRoles({
+    resource: "Price",
+    action: "update",
+    possession: "any",
+  })
+  async connectSuppliers(
+    @common.Param() params: PriceWhereUniqueInput,
+    @common.Body() body: SupplierWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      suppliers: {
+        connect: body,
+      },
+    };
+    await this.service.updatePrice({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/suppliers")
+  @nestAccessControl.UseRoles({
+    resource: "Price",
+    action: "update",
+    possession: "any",
+  })
+  async updateSuppliers(
+    @common.Param() params: PriceWhereUniqueInput,
+    @common.Body() body: SupplierWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      suppliers: {
+        set: body,
+      },
+    };
+    await this.service.updatePrice({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/suppliers")
+  @nestAccessControl.UseRoles({
+    resource: "Price",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectSuppliers(
+    @common.Param() params: PriceWhereUniqueInput,
+    @common.Body() body: SupplierWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      suppliers: {
+        disconnect: body,
+      },
+    };
+    await this.service.updatePrice({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

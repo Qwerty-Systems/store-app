@@ -10,7 +10,15 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Article as PrismaArticle } from "@prisma/client";
+
+import {
+  Prisma,
+  Article as PrismaArticle,
+  Image as PrismaImage,
+  Order as PrismaOrder,
+  Price as PrismaPrice,
+  Stock as PrismaStock,
+} from "@prisma/client";
 
 export class ArticleServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -35,5 +43,49 @@ export class ArticleServiceBase {
   }
   async deleteArticle(args: Prisma.ArticleDeleteArgs): Promise<PrismaArticle> {
     return this.prisma.article.delete(args);
+  }
+
+  async findImages(
+    parentId: string,
+    args: Prisma.ImageFindManyArgs
+  ): Promise<PrismaImage[]> {
+    return this.prisma.article
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .images(args);
+  }
+
+  async findOrders(
+    parentId: string,
+    args: Prisma.OrderFindManyArgs
+  ): Promise<PrismaOrder[]> {
+    return this.prisma.article
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .orders(args);
+  }
+
+  async findPrices(
+    parentId: string,
+    args: Prisma.PriceFindManyArgs
+  ): Promise<PrismaPrice[]> {
+    return this.prisma.article
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .prices(args);
+  }
+
+  async findStocks(
+    parentId: string,
+    args: Prisma.StockFindManyArgs
+  ): Promise<PrismaStock[]> {
+    return this.prisma.article
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .stocks(args);
   }
 }

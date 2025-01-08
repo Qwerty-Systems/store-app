@@ -11,12 +11,26 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
+import { ArticleWhereUniqueInput } from "../../article/base/ArticleWhereUniqueInput";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
+import { StringFilter } from "../../util/StringFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 
 @InputType()
 class ImageWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => ArticleWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ArticleWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ArticleWhereUniqueInput, {
+    nullable: true,
+  })
+  article?: ArticleWhereUniqueInput;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -27,6 +41,28 @@ class ImageWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  imageType?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  imageUrl?: StringNullableFilter;
 }
 
 export { ImageWhereInput as ImageWhereInput };

@@ -18,25 +18,57 @@ import { ArticleService } from "../article.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  additionalImages: "exampleAdditionalImages",
+  articleCode: "exampleArticleCode",
   createdAt: new Date(),
+  description: "exampleDescription",
+  descriptionEn: "exampleDescriptionEn",
   id: "exampleId",
+  imageUrl: "exampleImageUrl",
+  keywords: "exampleKeywords",
+  quantityPerUnit: 42,
+  unit: "exampleUnit",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  additionalImages: "exampleAdditionalImages",
+  articleCode: "exampleArticleCode",
   createdAt: new Date(),
+  description: "exampleDescription",
+  descriptionEn: "exampleDescriptionEn",
   id: "exampleId",
+  imageUrl: "exampleImageUrl",
+  keywords: "exampleKeywords",
+  quantityPerUnit: 42,
+  unit: "exampleUnit",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    additionalImages: "exampleAdditionalImages",
+    articleCode: "exampleArticleCode",
     createdAt: new Date(),
+    description: "exampleDescription",
+    descriptionEn: "exampleDescriptionEn",
     id: "exampleId",
+    imageUrl: "exampleImageUrl",
+    keywords: "exampleKeywords",
+    quantityPerUnit: 42,
+    unit: "exampleUnit",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  additionalImages: "exampleAdditionalImages",
+  articleCode: "exampleArticleCode",
   createdAt: new Date(),
+  description: "exampleDescription",
+  descriptionEn: "exampleDescriptionEn",
   id: "exampleId",
+  imageUrl: "exampleImageUrl",
+  keywords: "exampleKeywords",
+  quantityPerUnit: 42,
+  unit: "exampleUnit",
   updatedAt: new Date(),
 };
 

@@ -10,7 +10,13 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Location as PrismaLocation } from "@prisma/client";
+
+import {
+  Prisma,
+  Location as PrismaLocation,
+  Order as PrismaOrder,
+  Stock as PrismaStock,
+} from "@prisma/client";
 
 export class LocationServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -43,5 +49,21 @@ export class LocationServiceBase {
     args: Prisma.LocationDeleteArgs
   ): Promise<PrismaLocation> {
     return this.prisma.location.delete(args);
+  }
+
+  async getOrder(parentId: string): Promise<PrismaOrder | null> {
+    return this.prisma.location
+      .findUnique({
+        where: { id: parentId },
+      })
+      .order();
+  }
+
+  async getStock(parentId: string): Promise<PrismaStock | null> {
+    return this.prisma.location
+      .findUnique({
+        where: { id: parentId },
+      })
+      .stock();
   }
 }

@@ -26,6 +26,18 @@ import { Article } from "./Article";
 import { ArticleFindManyArgs } from "./ArticleFindManyArgs";
 import { ArticleWhereUniqueInput } from "./ArticleWhereUniqueInput";
 import { ArticleUpdateInput } from "./ArticleUpdateInput";
+import { ImageFindManyArgs } from "../../image/base/ImageFindManyArgs";
+import { Image } from "../../image/base/Image";
+import { ImageWhereUniqueInput } from "../../image/base/ImageWhereUniqueInput";
+import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
+import { Order } from "../../order/base/Order";
+import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
+import { PriceFindManyArgs } from "../../price/base/PriceFindManyArgs";
+import { Price } from "../../price/base/Price";
+import { PriceWhereUniqueInput } from "../../price/base/PriceWhereUniqueInput";
+import { StockFindManyArgs } from "../../stock/base/StockFindManyArgs";
+import { Stock } from "../../stock/base/Stock";
+import { StockWhereUniqueInput } from "../../stock/base/StockWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -51,8 +63,16 @@ export class ArticleControllerBase {
     return await this.service.createArticle({
       data: data,
       select: {
+        additionalImages: true,
+        articleCode: true,
         createdAt: true,
+        description: true,
+        descriptionEn: true,
         id: true,
+        imageUrl: true,
+        keywords: true,
+        quantityPerUnit: true,
+        unit: true,
         updatedAt: true,
       },
     });
@@ -75,8 +95,16 @@ export class ArticleControllerBase {
     return this.service.articles({
       ...args,
       select: {
+        additionalImages: true,
+        articleCode: true,
         createdAt: true,
+        description: true,
+        descriptionEn: true,
         id: true,
+        imageUrl: true,
+        keywords: true,
+        quantityPerUnit: true,
+        unit: true,
         updatedAt: true,
       },
     });
@@ -100,8 +128,16 @@ export class ArticleControllerBase {
     const result = await this.service.article({
       where: params,
       select: {
+        additionalImages: true,
+        articleCode: true,
         createdAt: true,
+        description: true,
+        descriptionEn: true,
         id: true,
+        imageUrl: true,
+        keywords: true,
+        quantityPerUnit: true,
+        unit: true,
         updatedAt: true,
       },
     });
@@ -134,8 +170,16 @@ export class ArticleControllerBase {
         where: params,
         data: data,
         select: {
+          additionalImages: true,
+          articleCode: true,
           createdAt: true,
+          description: true,
+          descriptionEn: true,
           id: true,
+          imageUrl: true,
+          keywords: true,
+          quantityPerUnit: true,
+          unit: true,
           updatedAt: true,
         },
       });
@@ -167,8 +211,16 @@ export class ArticleControllerBase {
       return await this.service.deleteArticle({
         where: params,
         select: {
+          additionalImages: true,
+          articleCode: true,
           createdAt: true,
+          description: true,
+          descriptionEn: true,
           id: true,
+          imageUrl: true,
+          keywords: true,
+          quantityPerUnit: true,
+          unit: true,
           updatedAt: true,
         },
       });
@@ -180,5 +232,437 @@ export class ArticleControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/images")
+  @ApiNestedQuery(ImageFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Image",
+    action: "read",
+    possession: "any",
+  })
+  async findImages(
+    @common.Req() request: Request,
+    @common.Param() params: ArticleWhereUniqueInput
+  ): Promise<Image[]> {
+    const query = plainToClass(ImageFindManyArgs, request.query);
+    const results = await this.service.findImages(params.id, {
+      ...query,
+      select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        id: true,
+        imageType: true,
+        imageUrl: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/images")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async connectImages(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: ImageWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      images: {
+        connect: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/images")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async updateImages(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: ImageWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      images: {
+        set: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/images")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectImages(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: ImageWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      images: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/orders")
+  @ApiNestedQuery(OrderFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "read",
+    possession: "any",
+  })
+  async findOrders(
+    @common.Req() request: Request,
+    @common.Param() params: ArticleWhereUniqueInput
+  ): Promise<Order[]> {
+    const query = plainToClass(OrderFindManyArgs, request.query);
+    const results = await this.service.findOrders(params.id, {
+      ...query,
+      select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        id: true,
+        orderDate: true,
+        orderLocation: true,
+        orderPrice: true,
+        orderQuantity: true,
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/orders")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async connectOrders(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: OrderWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      orders: {
+        connect: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/orders")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async updateOrders(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: OrderWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      orders: {
+        set: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/orders")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectOrders(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: OrderWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      orders: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/prices")
+  @ApiNestedQuery(PriceFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Price",
+    action: "read",
+    possession: "any",
+  })
+  async findPrices(
+    @common.Req() request: Request,
+    @common.Param() params: ArticleWhereUniqueInput
+  ): Promise<Price[]> {
+    const query = plainToClass(PriceFindManyArgs, request.query);
+    const results = await this.service.findPrices(params.id, {
+      ...query,
+      select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        effectiveDate: true,
+        id: true,
+        priceKenya: true,
+        priceNetherlands: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/prices")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async connectPrices(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: PriceWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      prices: {
+        connect: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/prices")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async updatePrices(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: PriceWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      prices: {
+        set: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/prices")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectPrices(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: PriceWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      prices: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/stocks")
+  @ApiNestedQuery(StockFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "read",
+    possession: "any",
+  })
+  async findStocks(
+    @common.Req() request: Request,
+    @common.Param() params: ArticleWhereUniqueInput
+  ): Promise<Stock[]> {
+    const query = plainToClass(StockFindManyArgs, request.query);
+    const results = await this.service.findStocks(params.id, {
+      ...query,
+      select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
+        availableStock: true,
+        createdAt: true,
+        id: true,
+        location: true,
+        newStock: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        outStock: true,
+        totalStock: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/stocks")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async connectStocks(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: StockWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      stocks: {
+        connect: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/stocks")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async updateStocks(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: StockWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      stocks: {
+        set: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/stocks")
+  @nestAccessControl.UseRoles({
+    resource: "Article",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectStocks(
+    @common.Param() params: ArticleWhereUniqueInput,
+    @common.Body() body: StockWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      stocks: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateArticle({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

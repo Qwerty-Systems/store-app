@@ -26,6 +26,15 @@ import { Stock } from "./Stock";
 import { StockFindManyArgs } from "./StockFindManyArgs";
 import { StockWhereUniqueInput } from "./StockWhereUniqueInput";
 import { StockUpdateInput } from "./StockUpdateInput";
+import { LocationFindManyArgs } from "../../location/base/LocationFindManyArgs";
+import { Location } from "../../location/base/Location";
+import { LocationWhereUniqueInput } from "../../location/base/LocationWhereUniqueInput";
+import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
+import { Order } from "../../order/base/Order";
+import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
+import { SupplierFindManyArgs } from "../../supplier/base/SupplierFindManyArgs";
+import { Supplier } from "../../supplier/base/Supplier";
+import { SupplierWhereUniqueInput } from "../../supplier/base/SupplierWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -47,10 +56,42 @@ export class StockControllerBase {
   })
   async createStock(@common.Body() data: StockCreateInput): Promise<Stock> {
     return await this.service.createStock({
-      data: data,
+      data: {
+        ...data,
+
+        article: data.article
+          ? {
+              connect: data.article,
+            }
+          : undefined,
+
+        order: data.order
+          ? {
+              connect: data.order,
+            }
+          : undefined,
+      },
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
+        availableStock: true,
         createdAt: true,
         id: true,
+        location: true,
+        newStock: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        outStock: true,
+        totalStock: true,
         updatedAt: true,
       },
     });
@@ -73,8 +114,26 @@ export class StockControllerBase {
     return this.service.stocks({
       ...args,
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
+        availableStock: true,
         createdAt: true,
         id: true,
+        location: true,
+        newStock: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        outStock: true,
+        totalStock: true,
         updatedAt: true,
       },
     });
@@ -98,8 +157,26 @@ export class StockControllerBase {
     const result = await this.service.stock({
       where: params,
       select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
+        availableStock: true,
         createdAt: true,
         id: true,
+        location: true,
+        newStock: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        outStock: true,
+        totalStock: true,
         updatedAt: true,
       },
     });
@@ -130,10 +207,42 @@ export class StockControllerBase {
     try {
       return await this.service.updateStock({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          article: data.article
+            ? {
+                connect: data.article,
+              }
+            : undefined,
+
+          order: data.order
+            ? {
+                connect: data.order,
+              }
+            : undefined,
+        },
         select: {
+          article: {
+            select: {
+              id: true,
+            },
+          },
+
+          availableStock: true,
           createdAt: true,
           id: true,
+          location: true,
+          newStock: true,
+
+          order: {
+            select: {
+              id: true,
+            },
+          },
+
+          outStock: true,
+          totalStock: true,
           updatedAt: true,
         },
       });
@@ -165,8 +274,26 @@ export class StockControllerBase {
       return await this.service.deleteStock({
         where: params,
         select: {
+          article: {
+            select: {
+              id: true,
+            },
+          },
+
+          availableStock: true,
           createdAt: true,
           id: true,
+          location: true,
+          newStock: true,
+
+          order: {
+            select: {
+              id: true,
+            },
+          },
+
+          outStock: true,
+          totalStock: true,
           updatedAt: true,
         },
       });
@@ -178,5 +305,339 @@ export class StockControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/locations")
+  @ApiNestedQuery(LocationFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Location",
+    action: "read",
+    possession: "any",
+  })
+  async findLocations(
+    @common.Req() request: Request,
+    @common.Param() params: StockWhereUniqueInput
+  ): Promise<Location[]> {
+    const query = plainToClass(LocationFindManyArgs, request.query);
+    const results = await this.service.findLocations(params.id, {
+      ...query,
+      select: {
+        address: true,
+        contact: true,
+        createdAt: true,
+        id: true,
+        name: true,
+
+        order: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/locations")
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "update",
+    possession: "any",
+  })
+  async connectLocations(
+    @common.Param() params: StockWhereUniqueInput,
+    @common.Body() body: LocationWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      locations: {
+        connect: body,
+      },
+    };
+    await this.service.updateStock({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/locations")
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "update",
+    possession: "any",
+  })
+  async updateLocations(
+    @common.Param() params: StockWhereUniqueInput,
+    @common.Body() body: LocationWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      locations: {
+        set: body,
+      },
+    };
+    await this.service.updateStock({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/locations")
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectLocations(
+    @common.Param() params: StockWhereUniqueInput,
+    @common.Body() body: LocationWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      locations: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateStock({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/orders")
+  @ApiNestedQuery(OrderFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "read",
+    possession: "any",
+  })
+  async findOrders(
+    @common.Req() request: Request,
+    @common.Param() params: StockWhereUniqueInput
+  ): Promise<Order[]> {
+    const query = plainToClass(OrderFindManyArgs, request.query);
+    const results = await this.service.findOrders(params.id, {
+      ...query,
+      select: {
+        article: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        id: true,
+        orderDate: true,
+        orderLocation: true,
+        orderPrice: true,
+        orderQuantity: true,
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/orders")
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "update",
+    possession: "any",
+  })
+  async connectOrders(
+    @common.Param() params: StockWhereUniqueInput,
+    @common.Body() body: OrderWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      orders: {
+        connect: body,
+      },
+    };
+    await this.service.updateStock({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/orders")
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "update",
+    possession: "any",
+  })
+  async updateOrders(
+    @common.Param() params: StockWhereUniqueInput,
+    @common.Body() body: OrderWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      orders: {
+        set: body,
+      },
+    };
+    await this.service.updateStock({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/orders")
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectOrders(
+    @common.Param() params: StockWhereUniqueInput,
+    @common.Body() body: OrderWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      orders: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateStock({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/suppliers")
+  @ApiNestedQuery(SupplierFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Supplier",
+    action: "read",
+    possession: "any",
+  })
+  async findSuppliers(
+    @common.Req() request: Request,
+    @common.Param() params: StockWhereUniqueInput
+  ): Promise<Supplier[]> {
+    const query = plainToClass(SupplierFindManyArgs, request.query);
+    const results = await this.service.findSuppliers(params.id, {
+      ...query,
+      select: {
+        contact: true,
+        country: true,
+        createdAt: true,
+        id: true,
+        name: true,
+
+        price: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/suppliers")
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "update",
+    possession: "any",
+  })
+  async connectSuppliers(
+    @common.Param() params: StockWhereUniqueInput,
+    @common.Body() body: SupplierWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      suppliers: {
+        connect: body,
+      },
+    };
+    await this.service.updateStock({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/suppliers")
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "update",
+    possession: "any",
+  })
+  async updateSuppliers(
+    @common.Param() params: StockWhereUniqueInput,
+    @common.Body() body: SupplierWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      suppliers: {
+        set: body,
+      },
+    };
+    await this.service.updateStock({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/suppliers")
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectSuppliers(
+    @common.Param() params: StockWhereUniqueInput,
+    @common.Body() body: SupplierWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      suppliers: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateStock({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

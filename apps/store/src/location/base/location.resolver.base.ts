@@ -18,11 +18,16 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Location } from "./Location";
 import { LocationCountArgs } from "./LocationCountArgs";
 import { LocationFindManyArgs } from "./LocationFindManyArgs";
 import { LocationFindUniqueArgs } from "./LocationFindUniqueArgs";
+import { CreateLocationArgs } from "./CreateLocationArgs";
+import { UpdateLocationArgs } from "./UpdateLocationArgs";
 import { DeleteLocationArgs } from "./DeleteLocationArgs";
+import { Order } from "../../order/base/Order";
+import { Stock } from "../../stock/base/Stock";
 import { LocationService } from "../location.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Location)
@@ -77,6 +82,75 @@ export class LocationResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Location)
+  @nestAccessControl.UseRoles({
+    resource: "Location",
+    action: "create",
+    possession: "any",
+  })
+  async createLocation(
+    @graphql.Args() args: CreateLocationArgs
+  ): Promise<Location> {
+    return await this.service.createLocation({
+      ...args,
+      data: {
+        ...args.data,
+
+        order: args.data.order
+          ? {
+              connect: args.data.order,
+            }
+          : undefined,
+
+        stock: args.data.stock
+          ? {
+              connect: args.data.stock,
+            }
+          : undefined,
+      },
+    });
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Location)
+  @nestAccessControl.UseRoles({
+    resource: "Location",
+    action: "update",
+    possession: "any",
+  })
+  async updateLocation(
+    @graphql.Args() args: UpdateLocationArgs
+  ): Promise<Location | null> {
+    try {
+      return await this.service.updateLocation({
+        ...args,
+        data: {
+          ...args.data,
+
+          order: args.data.order
+            ? {
+                connect: args.data.order,
+              }
+            : undefined,
+
+          stock: args.data.stock
+            ? {
+                connect: args.data.stock,
+              }
+            : undefined,
+        },
+      });
+    } catch (error) {
+      if (isRecordNotFoundError(error)) {
+        throw new GraphQLError(
+          `No resource was found for ${JSON.stringify(args.where)}`
+        );
+      }
+      throw error;
+    }
+  }
+
   @graphql.Mutation(() => Location)
   @nestAccessControl.UseRoles({
     resource: "Location",
@@ -96,5 +170,43 @@ export class LocationResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Order, {
+    nullable: true,
+    name: "order",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Order",
+    action: "read",
+    possession: "any",
+  })
+  async getOrder(@graphql.Parent() parent: Location): Promise<Order | null> {
+    const result = await this.service.getOrder(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Stock, {
+    nullable: true,
+    name: "stock",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Stock",
+    action: "read",
+    possession: "any",
+  })
+  async getStock(@graphql.Parent() parent: Location): Promise<Stock | null> {
+    const result = await this.service.getStock(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

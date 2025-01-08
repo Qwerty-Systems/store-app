@@ -49,10 +49,40 @@ export class SupplierControllerBase {
     @common.Body() data: SupplierCreateInput
   ): Promise<Supplier> {
     return await this.service.createSupplier({
-      data: data,
+      data: {
+        ...data,
+
+        price: data.price
+          ? {
+              connect: data.price,
+            }
+          : undefined,
+
+        stock: data.stock
+          ? {
+              connect: data.stock,
+            }
+          : undefined,
+      },
       select: {
+        contact: true,
+        country: true,
         createdAt: true,
         id: true,
+        name: true,
+
+        price: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -75,8 +105,24 @@ export class SupplierControllerBase {
     return this.service.suppliers({
       ...args,
       select: {
+        contact: true,
+        country: true,
         createdAt: true,
         id: true,
+        name: true,
+
+        price: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -100,8 +146,24 @@ export class SupplierControllerBase {
     const result = await this.service.supplier({
       where: params,
       select: {
+        contact: true,
+        country: true,
         createdAt: true,
         id: true,
+        name: true,
+
+        price: {
+          select: {
+            id: true,
+          },
+        },
+
+        stock: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -132,10 +194,40 @@ export class SupplierControllerBase {
     try {
       return await this.service.updateSupplier({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          price: data.price
+            ? {
+                connect: data.price,
+              }
+            : undefined,
+
+          stock: data.stock
+            ? {
+                connect: data.stock,
+              }
+            : undefined,
+        },
         select: {
+          contact: true,
+          country: true,
           createdAt: true,
           id: true,
+          name: true,
+
+          price: {
+            select: {
+              id: true,
+            },
+          },
+
+          stock: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });
@@ -167,8 +259,24 @@ export class SupplierControllerBase {
       return await this.service.deleteSupplier({
         where: params,
         select: {
+          contact: true,
+          country: true,
           createdAt: true,
           id: true,
+          name: true,
+
+          price: {
+            select: {
+              id: true,
+            },
+          },
+
+          stock: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });

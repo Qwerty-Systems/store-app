@@ -9,5 +9,125 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-class OrderCreateInput {}
+import { InputType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { ArticleWhereUniqueInput } from "../../article/base/ArticleWhereUniqueInput";
+
+import {
+  ValidateNested,
+  IsOptional,
+  IsDate,
+  IsString,
+  MaxLength,
+  IsNumber,
+  Min,
+  Max,
+  IsInt,
+} from "class-validator";
+
+import { Type } from "class-transformer";
+import { LocationCreateNestedManyWithoutOrdersInput } from "./LocationCreateNestedManyWithoutOrdersInput";
+import { StockWhereUniqueInput } from "../../stock/base/StockWhereUniqueInput";
+import { StockCreateNestedManyWithoutOrdersInput } from "./StockCreateNestedManyWithoutOrdersInput";
+
+@InputType()
+class OrderCreateInput {
+  @ApiProperty({
+    required: false,
+    type: () => ArticleWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ArticleWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ArticleWhereUniqueInput, {
+    nullable: true,
+  })
+  article?: ArticleWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => LocationCreateNestedManyWithoutOrdersInput,
+  })
+  @ValidateNested()
+  @Type(() => LocationCreateNestedManyWithoutOrdersInput)
+  @IsOptional()
+  @Field(() => LocationCreateNestedManyWithoutOrdersInput, {
+    nullable: true,
+  })
+  locations?: LocationCreateNestedManyWithoutOrdersInput;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  orderDate?: Date | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  orderLocation?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  orderPrice?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  orderQuantity?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => StockWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => StockWhereUniqueInput)
+  @IsOptional()
+  @Field(() => StockWhereUniqueInput, {
+    nullable: true,
+  })
+  stock?: StockWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => StockCreateNestedManyWithoutOrdersInput,
+  })
+  @ValidateNested()
+  @Type(() => StockCreateNestedManyWithoutOrdersInput)
+  @IsOptional()
+  @Field(() => StockCreateNestedManyWithoutOrdersInput, {
+    nullable: true,
+  })
+  stocks?: StockCreateNestedManyWithoutOrdersInput;
+}
+
 export { OrderCreateInput as OrderCreateInput };

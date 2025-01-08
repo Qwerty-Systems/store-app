@@ -11,11 +11,30 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString } from "class-validator";
+import { Article } from "../../article/base/Article";
+import {
+  ValidateNested,
+  IsOptional,
+  IsDate,
+  IsString,
+  IsNumber,
+  Min,
+  Max,
+} from "class-validator";
 import { Type } from "class-transformer";
+import { Supplier } from "../../supplier/base/Supplier";
 
 @ObjectType()
 class Price {
+  @ApiProperty({
+    required: false,
+    type: () => Article,
+  })
+  @ValidateNested()
+  @Type(() => Article)
+  @IsOptional()
+  article?: Article | null;
+
   @ApiProperty({
     required: true,
   })
@@ -25,12 +44,58 @@ class Price {
   createdAt!: Date;
 
   @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  effectiveDate!: Date | null;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   id!: string;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  priceKenya!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  priceNetherlands!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Supplier],
+  })
+  @ValidateNested()
+  @Type(() => Supplier)
+  @IsOptional()
+  suppliers?: Array<Supplier>;
 
   @ApiProperty({
     required: true,

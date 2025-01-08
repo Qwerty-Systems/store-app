@@ -11,11 +11,46 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString } from "class-validator";
+import { Article } from "../../article/base/Article";
+import {
+  ValidateNested,
+  IsOptional,
+  IsInt,
+  Min,
+  Max,
+  IsDate,
+  IsString,
+  MaxLength,
+} from "class-validator";
 import { Type } from "class-transformer";
+import { Location } from "../../location/base/Location";
+import { Order } from "../../order/base/Order";
+import { Supplier } from "../../supplier/base/Supplier";
 
 @ObjectType()
 class Stock {
+  @ApiProperty({
+    required: false,
+    type: () => Article,
+  })
+  @ValidateNested()
+  @Type(() => Article)
+  @IsOptional()
+  article?: Article | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  availableStock!: number | null;
+
   @ApiProperty({
     required: true,
   })
@@ -31,6 +66,93 @@ class Stock {
   @IsString()
   @Field(() => String)
   id!: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  location!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Location],
+  })
+  @ValidateNested()
+  @Type(() => Location)
+  @IsOptional()
+  locations?: Array<Location>;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  newStock!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => Order,
+  })
+  @ValidateNested()
+  @Type(() => Order)
+  @IsOptional()
+  order?: Order | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Order],
+  })
+  @ValidateNested()
+  @Type(() => Order)
+  @IsOptional()
+  orders?: Array<Order>;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  outStock!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Supplier],
+  })
+  @ValidateNested()
+  @Type(() => Supplier)
+  @IsOptional()
+  suppliers?: Array<Supplier>;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @Min(-999999999)
+  @Max(999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  totalStock!: number | null;
 
   @ApiProperty({
     required: true,

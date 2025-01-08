@@ -18,25 +18,45 @@ import { StockService } from "../stock.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  availableStock: 42,
   createdAt: new Date(),
   id: "exampleId",
+  location: "exampleLocation",
+  newStock: 42,
+  outStock: 42,
+  totalStock: 42,
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  availableStock: 42,
   createdAt: new Date(),
   id: "exampleId",
+  location: "exampleLocation",
+  newStock: 42,
+  outStock: 42,
+  totalStock: 42,
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    availableStock: 42,
     createdAt: new Date(),
     id: "exampleId",
+    location: "exampleLocation",
+    newStock: 42,
+    outStock: 42,
+    totalStock: 42,
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  availableStock: 42,
   createdAt: new Date(),
   id: "exampleId",
+  location: "exampleLocation",
+  newStock: 42,
+  outStock: 42,
+  totalStock: 42,
   updatedAt: new Date(),
 };
 

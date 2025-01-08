@@ -9,5 +9,79 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-class LocationCreateInput {}
+import { InputType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import {
+  IsString,
+  MaxLength,
+  IsOptional,
+  ValidateNested,
+} from "class-validator";
+import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
+import { Type } from "class-transformer";
+import { StockWhereUniqueInput } from "../../stock/base/StockWhereUniqueInput";
+
+@InputType()
+class LocationCreateInput {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  address?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  contact?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  name?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => OrderWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => OrderWhereUniqueInput)
+  @IsOptional()
+  @Field(() => OrderWhereUniqueInput, {
+    nullable: true,
+  })
+  order?: OrderWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => StockWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => StockWhereUniqueInput)
+  @IsOptional()
+  @Field(() => StockWhereUniqueInput, {
+    nullable: true,
+  })
+  stock?: StockWhereUniqueInput | null;
+}
+
 export { LocationCreateInput as LocationCreateInput };
