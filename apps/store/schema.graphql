@@ -1,0 +1,759 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Article {
+  additionalImages: String
+  articleCode: String
+  createdAt: DateTime!
+  description: String
+  descriptionEn: String
+  id: String!
+  imageUrl: String
+  images(orderBy: [ImageOrderByInput!], skip: Float, take: Float, where: ImageWhereInput): [Image!]!
+  keywords: String
+  orders(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): [Order!]!
+  prices(orderBy: [PriceOrderByInput!], skip: Float, take: Float, where: PriceWhereInput): [Price!]!
+  quantityPerUnit: Float
+  stocks(orderBy: [StockOrderByInput!], skip: Float, take: Float, where: StockWhereInput): [Stock!]!
+  unit: String
+  updatedAt: DateTime!
+}
+
+input ArticleCreateInput {
+  additionalImages: String
+  articleCode: String
+  description: String
+  descriptionEn: String
+  imageUrl: String
+  images: ImageCreateNestedManyWithoutArticlesInput
+  keywords: String
+  orders: OrderCreateNestedManyWithoutArticlesInput
+  prices: PriceCreateNestedManyWithoutArticlesInput
+  quantityPerUnit: Float
+  stocks: StockCreateNestedManyWithoutArticlesInput
+  unit: String
+}
+
+input ArticleOrderByInput {
+  additionalImages: SortOrder
+  articleCode: SortOrder
+  createdAt: SortOrder
+  description: SortOrder
+  descriptionEn: SortOrder
+  id: SortOrder
+  imageUrl: SortOrder
+  keywords: SortOrder
+  quantityPerUnit: SortOrder
+  unit: SortOrder
+  updatedAt: SortOrder
+}
+
+input ArticleUpdateInput {
+  additionalImages: String
+  articleCode: String
+  description: String
+  descriptionEn: String
+  imageUrl: String
+  images: ImageUpdateManyWithoutArticlesInput
+  keywords: String
+  orders: OrderUpdateManyWithoutArticlesInput
+  prices: PriceUpdateManyWithoutArticlesInput
+  quantityPerUnit: Float
+  stocks: StockUpdateManyWithoutArticlesInput
+  unit: String
+}
+
+input ArticleWhereInput {
+  additionalImages: StringNullableFilter
+  articleCode: StringNullableFilter
+  description: StringNullableFilter
+  descriptionEn: StringNullableFilter
+  id: StringFilter
+  imageUrl: StringNullableFilter
+  images: ImageListRelationFilter
+  keywords: StringNullableFilter
+  orders: OrderListRelationFilter
+  prices: PriceListRelationFilter
+  quantityPerUnit: IntNullableFilter
+  stocks: StockListRelationFilter
+  unit: StringNullableFilter
+}
+
+input ArticleWhereUniqueInput {
+  id: String!
+}
+
+input Credentials {
+  password: String!
+  username: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: DateTime
+  notIn: [DateTime!]
+}
+
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: Float
+  notIn: [Float!]
+}
+
+type Image {
+  article: Article
+  createdAt: DateTime!
+  id: String!
+  imageType: String
+  imageUrl: String
+  updatedAt: DateTime!
+}
+
+input ImageCreateInput {
+  article: ArticleWhereUniqueInput
+  imageType: String
+  imageUrl: String
+}
+
+input ImageCreateNestedManyWithoutArticlesInput {
+  connect: [ImageWhereUniqueInput!]
+}
+
+input ImageListRelationFilter {
+  every: ImageWhereInput
+  none: ImageWhereInput
+  some: ImageWhereInput
+}
+
+input ImageOrderByInput {
+  articleId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  imageType: SortOrder
+  imageUrl: SortOrder
+  updatedAt: SortOrder
+}
+
+input ImageUpdateInput {
+  article: ArticleWhereUniqueInput
+  imageType: String
+  imageUrl: String
+}
+
+input ImageUpdateManyWithoutArticlesInput {
+  connect: [ImageWhereUniqueInput!]
+  disconnect: [ImageWhereUniqueInput!]
+  set: [ImageWhereUniqueInput!]
+}
+
+input ImageWhereInput {
+  article: ArticleWhereUniqueInput
+  id: StringFilter
+  imageType: StringNullableFilter
+  imageUrl: StringNullableFilter
+}
+
+input ImageWhereUniqueInput {
+  id: String!
+}
+
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: Int
+  notIn: [Int!]
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type Location {
+  address: String
+  contact: String
+  createdAt: DateTime!
+  id: String!
+  name: String
+  order: Order
+  stock: Stock
+  updatedAt: DateTime!
+}
+
+input LocationCreateInput {
+  address: String
+  contact: String
+  name: String
+  order: OrderWhereUniqueInput
+  stock: StockWhereUniqueInput
+}
+
+input LocationCreateNestedManyWithoutOrdersInput {
+  connect: [LocationWhereUniqueInput!]
+}
+
+input LocationCreateNestedManyWithoutStocksInput {
+  connect: [LocationWhereUniqueInput!]
+}
+
+input LocationListRelationFilter {
+  every: LocationWhereInput
+  none: LocationWhereInput
+  some: LocationWhereInput
+}
+
+input LocationOrderByInput {
+  address: SortOrder
+  contact: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  orderId: SortOrder
+  stockId: SortOrder
+  updatedAt: SortOrder
+}
+
+input LocationUpdateInput {
+  address: String
+  contact: String
+  name: String
+  order: OrderWhereUniqueInput
+  stock: StockWhereUniqueInput
+}
+
+input LocationUpdateManyWithoutOrdersInput {
+  connect: [LocationWhereUniqueInput!]
+  disconnect: [LocationWhereUniqueInput!]
+  set: [LocationWhereUniqueInput!]
+}
+
+input LocationUpdateManyWithoutStocksInput {
+  connect: [LocationWhereUniqueInput!]
+  disconnect: [LocationWhereUniqueInput!]
+  set: [LocationWhereUniqueInput!]
+}
+
+input LocationWhereInput {
+  address: StringNullableFilter
+  contact: StringNullableFilter
+  id: StringFilter
+  name: StringNullableFilter
+  order: OrderWhereUniqueInput
+  stock: StockWhereUniqueInput
+}
+
+input LocationWhereUniqueInput {
+  id: String!
+}
+
+type MetaQueryPayload {
+  count: Float!
+}
+
+type Mutation {
+  createArticle(data: ArticleCreateInput!): Article!
+  createImage(data: ImageCreateInput!): Image!
+  createLocation(data: LocationCreateInput!): Location!
+  createOrder(data: OrderCreateInput!): Order!
+  createPrice(data: PriceCreateInput!): Price!
+  createStock(data: StockCreateInput!): Stock!
+  createSupplier(data: SupplierCreateInput!): Supplier!
+  createUser(data: UserCreateInput!): User!
+  deleteArticle(where: ArticleWhereUniqueInput!): Article!
+  deleteImage(where: ImageWhereUniqueInput!): Image!
+  deleteLocation(where: LocationWhereUniqueInput!): Location!
+  deleteOrder(where: OrderWhereUniqueInput!): Order!
+  deletePrice(where: PriceWhereUniqueInput!): Price!
+  deleteStock(where: StockWhereUniqueInput!): Stock!
+  deleteSupplier(where: SupplierWhereUniqueInput!): Supplier!
+  deleteUser(where: UserWhereUniqueInput!): User!
+  login(credentials: Credentials!): UserInfo!
+  updateArticle(data: ArticleUpdateInput!, where: ArticleWhereUniqueInput!): Article!
+  updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image!
+  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location!
+  updateOrder(data: OrderUpdateInput!, where: OrderWhereUniqueInput!): Order!
+  updatePrice(data: PriceUpdateInput!, where: PriceWhereUniqueInput!): Price!
+  updateStock(data: StockUpdateInput!, where: StockWhereUniqueInput!): Stock!
+  updateSupplier(data: SupplierUpdateInput!, where: SupplierWhereUniqueInput!): Supplier!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+}
+
+type Order {
+  article: Article
+  createdAt: DateTime!
+  id: String!
+  locations(orderBy: [LocationOrderByInput!], skip: Float, take: Float, where: LocationWhereInput): [Location!]!
+  orderDate: DateTime
+  orderLocation: String
+  orderPrice: Float
+  orderQuantity: Float
+  stock: Stock
+  stocks(orderBy: [StockOrderByInput!], skip: Float, take: Float, where: StockWhereInput): [Stock!]!
+  updatedAt: DateTime!
+}
+
+input OrderCreateInput {
+  article: ArticleWhereUniqueInput
+  locations: LocationCreateNestedManyWithoutOrdersInput
+  orderDate: DateTime
+  orderLocation: String
+  orderPrice: Float
+  orderQuantity: Float
+  stock: StockWhereUniqueInput
+  stocks: StockCreateNestedManyWithoutOrdersInput
+}
+
+input OrderCreateNestedManyWithoutArticlesInput {
+  connect: [OrderWhereUniqueInput!]
+}
+
+input OrderCreateNestedManyWithoutStocksInput {
+  connect: [OrderWhereUniqueInput!]
+}
+
+input OrderListRelationFilter {
+  every: OrderWhereInput
+  none: OrderWhereInput
+  some: OrderWhereInput
+}
+
+input OrderOrderByInput {
+  articleId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  orderDate: SortOrder
+  orderLocation: SortOrder
+  orderPrice: SortOrder
+  orderQuantity: SortOrder
+  stockId: SortOrder
+  updatedAt: SortOrder
+}
+
+input OrderUpdateInput {
+  article: ArticleWhereUniqueInput
+  locations: LocationUpdateManyWithoutOrdersInput
+  orderDate: DateTime
+  orderLocation: String
+  orderPrice: Float
+  orderQuantity: Float
+  stock: StockWhereUniqueInput
+  stocks: StockUpdateManyWithoutOrdersInput
+}
+
+input OrderUpdateManyWithoutArticlesInput {
+  connect: [OrderWhereUniqueInput!]
+  disconnect: [OrderWhereUniqueInput!]
+  set: [OrderWhereUniqueInput!]
+}
+
+input OrderUpdateManyWithoutStocksInput {
+  connect: [OrderWhereUniqueInput!]
+  disconnect: [OrderWhereUniqueInput!]
+  set: [OrderWhereUniqueInput!]
+}
+
+input OrderWhereInput {
+  article: ArticleWhereUniqueInput
+  id: StringFilter
+  locations: LocationListRelationFilter
+  orderDate: DateTimeNullableFilter
+  orderLocation: StringNullableFilter
+  orderPrice: FloatNullableFilter
+  orderQuantity: IntNullableFilter
+  stock: StockWhereUniqueInput
+  stocks: StockListRelationFilter
+}
+
+input OrderWhereUniqueInput {
+  id: String!
+}
+
+type Price {
+  article: Article
+  createdAt: DateTime!
+  effectiveDate: DateTime
+  id: String!
+  priceKenya: Float
+  priceNetherlands: Float
+  suppliers(orderBy: [SupplierOrderByInput!], skip: Float, take: Float, where: SupplierWhereInput): [Supplier!]!
+  updatedAt: DateTime!
+}
+
+input PriceCreateInput {
+  article: ArticleWhereUniqueInput
+  effectiveDate: DateTime
+  priceKenya: Float
+  priceNetherlands: Float
+  suppliers: SupplierCreateNestedManyWithoutPricesInput
+}
+
+input PriceCreateNestedManyWithoutArticlesInput {
+  connect: [PriceWhereUniqueInput!]
+}
+
+input PriceListRelationFilter {
+  every: PriceWhereInput
+  none: PriceWhereInput
+  some: PriceWhereInput
+}
+
+input PriceOrderByInput {
+  articleId: SortOrder
+  createdAt: SortOrder
+  effectiveDate: SortOrder
+  id: SortOrder
+  priceKenya: SortOrder
+  priceNetherlands: SortOrder
+  updatedAt: SortOrder
+}
+
+input PriceUpdateInput {
+  article: ArticleWhereUniqueInput
+  effectiveDate: DateTime
+  priceKenya: Float
+  priceNetherlands: Float
+  suppliers: SupplierUpdateManyWithoutPricesInput
+}
+
+input PriceUpdateManyWithoutArticlesInput {
+  connect: [PriceWhereUniqueInput!]
+  disconnect: [PriceWhereUniqueInput!]
+  set: [PriceWhereUniqueInput!]
+}
+
+input PriceWhereInput {
+  article: ArticleWhereUniqueInput
+  effectiveDate: DateTimeNullableFilter
+  id: StringFilter
+  priceKenya: FloatNullableFilter
+  priceNetherlands: FloatNullableFilter
+  suppliers: SupplierListRelationFilter
+}
+
+input PriceWhereUniqueInput {
+  id: String!
+}
+
+type Query {
+  _articlesMeta(where: ArticleWhereInput): MetaQueryPayload!
+  _imagesMeta(where: ImageWhereInput): MetaQueryPayload!
+  _locationsMeta(where: LocationWhereInput): MetaQueryPayload!
+  _ordersMeta(where: OrderWhereInput): MetaQueryPayload!
+  _pricesMeta(where: PriceWhereInput): MetaQueryPayload!
+  _stocksMeta(where: StockWhereInput): MetaQueryPayload!
+  _suppliersMeta(where: SupplierWhereInput): MetaQueryPayload!
+  _usersMeta(where: UserWhereInput): MetaQueryPayload!
+  article(where: ArticleWhereUniqueInput!): Article
+  articles(orderBy: [ArticleOrderByInput!], skip: Float, take: Float, where: ArticleWhereInput): [Article!]!
+  image(where: ImageWhereUniqueInput!): Image
+  images(orderBy: [ImageOrderByInput!], skip: Float, take: Float, where: ImageWhereInput): [Image!]!
+  location(where: LocationWhereUniqueInput!): Location
+  locations(orderBy: [LocationOrderByInput!], skip: Float, take: Float, where: LocationWhereInput): [Location!]!
+  order(where: OrderWhereUniqueInput!): Order
+  orders(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): [Order!]!
+  price(where: PriceWhereUniqueInput!): Price
+  prices(orderBy: [PriceOrderByInput!], skip: Float, take: Float, where: PriceWhereInput): [Price!]!
+  stock(where: StockWhereUniqueInput!): Stock
+  stocks(orderBy: [StockOrderByInput!], skip: Float, take: Float, where: StockWhereInput): [Stock!]!
+  supplier(where: SupplierWhereUniqueInput!): Supplier
+  suppliers(orderBy: [SupplierOrderByInput!], skip: Float, take: Float, where: SupplierWhereInput): [Supplier!]!
+  user(where: UserWhereUniqueInput!): User
+  userInfo: UserInfo!
+  users(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): [User!]!
+}
+
+enum QueryMode {
+  Default
+  Insensitive
+}
+
+enum SortOrder {
+  Asc
+  Desc
+}
+
+type Stock {
+  article: Article
+  availableStock: Float
+  createdAt: DateTime!
+  id: String!
+  location: String
+  locations(orderBy: [LocationOrderByInput!], skip: Float, take: Float, where: LocationWhereInput): [Location!]!
+  newStock: Float
+  order: Order
+  orders(orderBy: [OrderOrderByInput!], skip: Float, take: Float, where: OrderWhereInput): [Order!]!
+  outStock: Float
+  suppliers(orderBy: [SupplierOrderByInput!], skip: Float, take: Float, where: SupplierWhereInput): [Supplier!]!
+  totalStock: Float
+  updatedAt: DateTime!
+}
+
+input StockCreateInput {
+  article: ArticleWhereUniqueInput
+  availableStock: Float
+  location: String
+  locations: LocationCreateNestedManyWithoutStocksInput
+  newStock: Float
+  order: OrderWhereUniqueInput
+  orders: OrderCreateNestedManyWithoutStocksInput
+  outStock: Float
+  suppliers: SupplierCreateNestedManyWithoutStocksInput
+  totalStock: Float
+}
+
+input StockCreateNestedManyWithoutArticlesInput {
+  connect: [StockWhereUniqueInput!]
+}
+
+input StockCreateNestedManyWithoutOrdersInput {
+  connect: [StockWhereUniqueInput!]
+}
+
+input StockListRelationFilter {
+  every: StockWhereInput
+  none: StockWhereInput
+  some: StockWhereInput
+}
+
+input StockOrderByInput {
+  articleId: SortOrder
+  availableStock: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  location: SortOrder
+  newStock: SortOrder
+  orderId: SortOrder
+  outStock: SortOrder
+  totalStock: SortOrder
+  updatedAt: SortOrder
+}
+
+input StockUpdateInput {
+  article: ArticleWhereUniqueInput
+  availableStock: Float
+  location: String
+  locations: LocationUpdateManyWithoutStocksInput
+  newStock: Float
+  order: OrderWhereUniqueInput
+  orders: OrderUpdateManyWithoutStocksInput
+  outStock: Float
+  suppliers: SupplierUpdateManyWithoutStocksInput
+  totalStock: Float
+}
+
+input StockUpdateManyWithoutArticlesInput {
+  connect: [StockWhereUniqueInput!]
+  disconnect: [StockWhereUniqueInput!]
+  set: [StockWhereUniqueInput!]
+}
+
+input StockUpdateManyWithoutOrdersInput {
+  connect: [StockWhereUniqueInput!]
+  disconnect: [StockWhereUniqueInput!]
+  set: [StockWhereUniqueInput!]
+}
+
+input StockWhereInput {
+  article: ArticleWhereUniqueInput
+  availableStock: IntNullableFilter
+  id: StringFilter
+  location: StringNullableFilter
+  locations: LocationListRelationFilter
+  newStock: IntNullableFilter
+  order: OrderWhereUniqueInput
+  orders: OrderListRelationFilter
+  outStock: IntNullableFilter
+  suppliers: SupplierListRelationFilter
+  totalStock: IntNullableFilter
+}
+
+input StockWhereUniqueInput {
+  id: String!
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+type Supplier {
+  contact: String
+  country: String
+  createdAt: DateTime!
+  id: String!
+  name: String
+  price: Price
+  stock: Stock
+  updatedAt: DateTime!
+}
+
+input SupplierCreateInput {
+  contact: String
+  country: String
+  name: String
+  price: PriceWhereUniqueInput
+  stock: StockWhereUniqueInput
+}
+
+input SupplierCreateNestedManyWithoutPricesInput {
+  connect: [SupplierWhereUniqueInput!]
+}
+
+input SupplierCreateNestedManyWithoutStocksInput {
+  connect: [SupplierWhereUniqueInput!]
+}
+
+input SupplierListRelationFilter {
+  every: SupplierWhereInput
+  none: SupplierWhereInput
+  some: SupplierWhereInput
+}
+
+input SupplierOrderByInput {
+  contact: SortOrder
+  country: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  priceId: SortOrder
+  stockId: SortOrder
+  updatedAt: SortOrder
+}
+
+input SupplierUpdateInput {
+  contact: String
+  country: String
+  name: String
+  price: PriceWhereUniqueInput
+  stock: StockWhereUniqueInput
+}
+
+input SupplierUpdateManyWithoutPricesInput {
+  connect: [SupplierWhereUniqueInput!]
+  disconnect: [SupplierWhereUniqueInput!]
+  set: [SupplierWhereUniqueInput!]
+}
+
+input SupplierUpdateManyWithoutStocksInput {
+  connect: [SupplierWhereUniqueInput!]
+  disconnect: [SupplierWhereUniqueInput!]
+  set: [SupplierWhereUniqueInput!]
+}
+
+input SupplierWhereInput {
+  contact: StringNullableFilter
+  country: StringNullableFilter
+  id: StringFilter
+  name: StringNullableFilter
+  price: PriceWhereUniqueInput
+  stock: StockWhereUniqueInput
+}
+
+input SupplierWhereUniqueInput {
+  id: String!
+}
+
+type User {
+  createdAt: DateTime!
+  email: String
+  firstName: String
+  id: String!
+  lastName: String
+  roles: JSON!
+  updatedAt: DateTime!
+  username: String!
+}
+
+input UserCreateInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String!
+  roles: JSON!
+  username: String!
+}
+
+type UserInfo {
+  accessToken: String
+  id: String!
+  roles: [String!]!
+  username: String!
+}
+
+input UserOrderByInput {
+  createdAt: SortOrder
+  email: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  lastName: SortOrder
+  password: SortOrder
+  roles: SortOrder
+  updatedAt: SortOrder
+  username: SortOrder
+}
+
+input UserUpdateInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  roles: JSON
+  username: String
+}
+
+input UserWhereInput {
+  email: StringNullableFilter
+  firstName: StringNullableFilter
+  id: StringFilter
+  lastName: StringNullableFilter
+  username: StringFilter
+}
+
+input UserWhereUniqueInput {
+  id: String!
+}
