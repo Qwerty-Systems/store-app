@@ -17,22 +17,22 @@ import { ArticleList } from "./article/ArticleList";
 import { ArticleCreate } from "./article/ArticleCreate";
 import { ArticleEdit } from "./article/ArticleEdit";
 import { ArticleShow } from "./article/ArticleShow";
-import { StockList } from "./stock/StockList";
-import { StockCreate } from "./stock/StockCreate";
-import { StockEdit } from "./stock/StockEdit";
-import { StockShow } from "./stock/StockShow";
 import { PriceList } from "./price/PriceList";
 import { PriceCreate } from "./price/PriceCreate";
 import { PriceEdit } from "./price/PriceEdit";
 import { PriceShow } from "./price/PriceShow";
-import { ImageList } from "./image/ImageList";
-import { ImageCreate } from "./image/ImageCreate";
-import { ImageEdit } from "./image/ImageEdit";
-import { ImageShow } from "./image/ImageShow";
+import { StockList } from "./stock/StockList";
+import { StockCreate } from "./stock/StockCreate";
+import { StockEdit } from "./stock/StockEdit";
+import { StockShow } from "./stock/StockShow";
 import { SupplierList } from "./supplier/SupplierList";
 import { SupplierCreate } from "./supplier/SupplierCreate";
 import { SupplierEdit } from "./supplier/SupplierEdit";
 import { SupplierShow } from "./supplier/SupplierShow";
+import { ImageList } from "./image/ImageList";
+import { ImageCreate } from "./image/ImageCreate";
+import { ImageEdit } from "./image/ImageEdit";
+import { ImageShow } from "./image/ImageShow";
 import { OrderList } from "./order/OrderList";
 import { OrderCreate } from "./order/OrderCreate";
 import { OrderEdit } from "./order/OrderEdit";
@@ -72,13 +72,6 @@ const App = (): React.ReactElement => {
           show={ArticleShow}
         />
         <Resource
-          name="Stock"
-          list={StockList}
-          edit={StockEdit}
-          create={StockCreate}
-          show={StockShow}
-        />
-        <Resource
           name="Price"
           list={PriceList}
           edit={PriceEdit}
@@ -86,11 +79,11 @@ const App = (): React.ReactElement => {
           show={PriceShow}
         />
         <Resource
-          name="Image"
-          list={ImageList}
-          edit={ImageEdit}
-          create={ImageCreate}
-          show={ImageShow}
+          name="Stock"
+          list={StockList}
+          edit={StockEdit}
+          create={StockCreate}
+          show={StockShow}
         />
         <Resource
           name="Supplier"
@@ -98,6 +91,13 @@ const App = (): React.ReactElement => {
           edit={SupplierEdit}
           create={SupplierCreate}
           show={SupplierShow}
+        />
+        <Resource
+          name="Image"
+          list={ImageList}
+          edit={ImageEdit}
+          create={ImageCreate}
+          show={ImageShow}
         />
         <Resource
           name="Order"
