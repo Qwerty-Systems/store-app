@@ -1,0 +1,36 @@
+name: continuous integration - stock
+
+concurrency:
+  group: stock
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["*"]
+    paths: ["./apps/stock"]
+
+jobs:
+  continuous-integration:
+    name: continuous integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: install dependencies
+        run: npm install
+        working-directory: ./apps/stock
+
+      - name: build
+        run: npm run build
+        working-directory: ./apps/stock
+
+      - name: test
+        run: npm test
+        working-directory: ./apps/stock
