@@ -1,4 +1,4 @@
-import { ArticleWhereUniqueInput } from "../article/ArticleWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { LocationListRelationFilter } from "../location/LocationListRelationFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
@@ -9,7 +9,7 @@ import { StockWhereUniqueInput } from "../stock/StockWhereUniqueInput";
 import { StockListRelationFilter } from "../stock/StockListRelationFilter";
 
 export type OrderWhereInput = {
-  article?: ArticleWhereUniqueInput;
+  article?: ProductWhereUniqueInput;
   id?: StringFilter;
   locations?: LocationListRelationFilter;
   orderDate?: DateTimeNullableFilter;

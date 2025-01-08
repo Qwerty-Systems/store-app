@@ -1,7 +1,7 @@
-import { ArticleWhereUniqueInput } from "../article/ArticleWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
 import { InputJsonValue } from "../../types";
 
 export type ImageCreateInput = {
-  article?: ArticleWhereUniqueInput | null;
-  image?: InputJsonValue;
+  article?: ProductWhereUniqueInput | null;
+  image: InputJsonValue;
 };

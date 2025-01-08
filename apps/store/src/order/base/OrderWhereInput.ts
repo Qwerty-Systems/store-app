@@ -11,7 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ArticleWhereUniqueInput } from "../../article/base/ArticleWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
@@ -27,15 +27,15 @@ import { StockListRelationFilter } from "../../stock/base/StockListRelationFilte
 class OrderWhereInput {
   @ApiProperty({
     required: false,
-    type: () => ArticleWhereUniqueInput,
+    type: () => ProductWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => ArticleWhereUniqueInput)
+  @Type(() => ProductWhereUniqueInput)
   @IsOptional()
-  @Field(() => ArticleWhereUniqueInput, {
+  @Field(() => ProductWhereUniqueInput, {
     nullable: true,
   })
-  article?: ArticleWhereUniqueInput;
+  article?: ProductWhereUniqueInput;
 
   @ApiProperty({
     required: false,

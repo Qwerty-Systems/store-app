@@ -1,8 +1,8 @@
-import { ArticleWhereUniqueInput } from "../article/ArticleWhereUniqueInput";
+import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
 import { SupplierUpdateManyWithoutPricesInput } from "./SupplierUpdateManyWithoutPricesInput";
 
 export type PriceUpdateInput = {
-  article?: ArticleWhereUniqueInput | null;
+  article?: ProductWhereUniqueInput | null;
   effectiveDate?: Date | null;
   priceKenya?: number | null;
   priceNetherlands?: number | null;

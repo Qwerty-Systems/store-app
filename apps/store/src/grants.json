@@ -31,61 +31,61 @@
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Product",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Product",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Product",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Product",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Location",
+    "resource": "Product",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Article",
+    "resource": "Location",
     "action": "read:any",
     "attributes": "*"
   },
@@ -151,61 +151,61 @@
   },
   {
     "role": "user",
-    "resource": "Supplier",
+    "resource": "Image",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Supplier",
+    "resource": "Image",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Supplier",
+    "resource": "Image",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Supplier",
+    "resource": "Image",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Supplier",
+    "resource": "Image",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Image",
+    "resource": "Supplier",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Image",
+    "resource": "Supplier",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Image",
+    "resource": "Supplier",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Image",
+    "resource": "Supplier",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Image",
+    "resource": "Supplier",
     "action": "read:any",
     "attributes": "*"
   },

@@ -1,8 +1,8 @@
-import { Article } from "../article/Article";
+import { Product } from "../product/Product";
 import { Supplier } from "../supplier/Supplier";
 
 export type Price = {
-  article?: Article | null;
+  article?: Product | null;
   createdAt: Date;
   effectiveDate: Date | null;
   id: string;
